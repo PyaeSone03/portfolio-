@@ -3,11 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
 const geistSans = Geist({

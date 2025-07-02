@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import {
-  AppleIcon,
-  CodeXmlIcon,
   FileIcon,
   FilesIcon,
   GithubIcon,
@@ -16,12 +14,8 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardAction,
   CardContent,
-  CardFooter,
 } from "@/components/ui/card";
-import { Progress } from "@radix-ui/react-progress";
 
 const page = () => {
   const education = [
@@ -144,7 +138,7 @@ const page = () => {
 
           <CardContent className="grid grid-cols-1 gap-4">
             {education.map((edu, index) => (
-              <div className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
+              <div key={index} className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
                 <p className="font-medium text-lg text-gray-900">{edu.name}</p>
                 <p className="text-sm text-muted-foreground">
                   {edu.description}
@@ -164,7 +158,7 @@ const page = () => {
 
           <CardContent className="grid grid-cols-1 gap-4">
             {certifications.map((cert, index) => (
-              <div className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
+              <div key={index} className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
                 <p className="font-medium text-lg text-gray-900">{cert.name}</p>
                 <p className="text-sm text-muted-foreground">{cert.time}</p>
               </div>

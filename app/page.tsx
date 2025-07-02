@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Linkedin, GithubIcon, FigmaIcon } from "lucide-react";
+import { Linkedin, GithubIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
@@ -10,11 +10,9 @@ export default function Home() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col lg:flex-row items-center justify-between gap-8 rounded-lg py-8">
         {/* Left Side */}
         <div className="flex-1 w-full basis-3/5 space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-           Name
-          </h1>
+          <h1 className="text-4xl font-bold tracking-tight">Name</h1>
           <p className="text-muted-foreground text-base">
-            Frontend Developer & UI/UX Designer
+            Frontend Developer &amp; UI/UX Designer
           </p>
 
           <div className="flex gap-4 text-sm text-gray-700">

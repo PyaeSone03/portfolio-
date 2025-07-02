@@ -2,9 +2,7 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardDescription,
   CardContent,
-  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,8 +14,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import React from "react";
 import { CircularProgress } from "@/components/ui/CircularProgress";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { title } from "process";
+
 
 const page = () => {
   const languages = [
@@ -129,7 +126,7 @@ const page = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
               <LibraryIcon className="w-8 h-8" />
-              Frameworks & Libraries
+              Frameworks &amp; Libraries
             </CardTitle>
           </CardHeader>
 
