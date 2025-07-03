@@ -100,7 +100,7 @@ const page = () => {
             <h4 className="text-xl font-semibold mb-1">Background</h4>
             <p className="leading-relaxed">
               Originally from Boston, I moved to San Francisco 5 years ago to
-              pursue my passion for technology and design. I'm currently working
+              pursue my passion for technology and design. I&apos;m currently working
               as a Senior UX Designer at TechVision, where I help create
               intuitive digital products that enhance user experiences across
               various platforms.
@@ -110,7 +110,7 @@ const page = () => {
           <div>
             <h4 className="text-xl font-semibold mb-1">Experience</h4>
             <p className="leading-relaxed">
-              Over the last 7 years, I’ve worked with cross-functional teams to
+              Over the last 7 years, I&apos;ve worked with cross-functional teams to
               build web and mobile apps, design systems, and improve user flows.
               I specialize in bridging the gap between design and development.
             </p>

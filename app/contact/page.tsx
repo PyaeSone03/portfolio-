@@ -60,7 +60,7 @@ export default function Home() {
             <CardHeader className="mb-4">
               <CardTitle className="text-2xl font-bold">Send a Message</CardTitle>
               <CardDescription>
-                I'd love to hear from you. Fill out the form below!
+                I&apos;d love to hear from you. Fill out the form below!
               </CardDescription>
             </CardHeader>
 
