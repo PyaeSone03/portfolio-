@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
-const page = () => {
+const Page = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -107,7 +107,7 @@ const page = () => {
                 Send a Message
               </CardTitle>
               <CardDescription className="text-black/70 dark:text-white/70">
-                I'd love to hear from you. Fill out the form below!
+                I&apos;d love to hear from you. Fill out the form below!
               </CardDescription>
             </CardHeader>
 
@@ -199,4 +199,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
