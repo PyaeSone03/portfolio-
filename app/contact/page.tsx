@@ -24,27 +24,36 @@ const Page = () => {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     try {
       const encodedSubject = encodeURIComponent(`${subject} - from ${email}`);
-      const encodedBody = encodeURIComponent(
-        `Name - ${name} \n
-        ${message}`
-      );
-
+      const encodedBody = encodeURIComponent(`Name - ${name}\n${message}`);
+  
       const mailtoLink = `mailto:xamer11285@decodewp.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-      toast.success("Mail client opened. You can now send your message.");
-      window.location.href = mailtoLink;
+  
+      if (typeof window !== "undefined") {
+        const newWindow = window.open(mailtoLink);
+  
+        if (newWindow) {
+          toast.success("Mail client opened. You can now send your message.");
+          newWindow.focus();
+        } else {
+          // Fallback: copy mailtoLink to clipboard and notify user
+          navigator.clipboard.writeText(mailtoLink).then(() => {
+            toast.info(
+              "Could not open mail client automatically. Mailto link copied to clipboard."
+            );
+          });
+        }
+      }
     } catch (error) {
       console.error("Failed to open mail client:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };
-
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black px-4 py-8">
       <div className="mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 rounded-2xl p-10 shadow-lg bg-white dark:bg-black">
