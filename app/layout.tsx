@@ -1,12 +1,22 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import { MenuIcon } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,72 +35,83 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {/* HEADER */}
         <header className="sticky top-0 z-[100] w-full bg-white border-b shadow-sm">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            {/* Logo or Brand Name */}
-            <div className="text-xl font-semibold">icon</div>
+            {/* Logo */}
+            <div className="text-xl font-semibold">My Portfolio</div>
 
-            {/* Navigation Menu */}
-            <NavigationMenu>
-              <NavigationMenuList className="flex gap-4">
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/"
-                    className="hover:text-blue-600 transition"
-                  >
-                    Home
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/aboutme"
-                    className="hover:text-blue-600 transition"
-                  >
-                    about Me
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/skill"
-                    className="hover:text-blue-600 transition"
-                  >
-                    Skills
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/projects"
-                    className="hover:text-blue-600 transition"
-                  >
-                    Projects
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/contact"
-                    className="hover:text-blue-600 transition"
-                  >
-                    Contact
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex">
+              <NavigationMenu>
+                <NavigationMenuList className="flex gap-4">
+                  {[
+                    { href: "/", label: "Home" },
+                    { href: "/aboutme", label: "About Me" },
+                    { href: "/skill", label: "Skills" },
+                    { href: "/projects", label: "Projects" },
+                    { href: "/contact", label: "Contact" },
+                  ].map((item) => (
+                    <NavigationMenuItem key={item.href}>
+                      <NavigationMenuLink
+                        href={item.href}
+                        className="hover:text-blue-600 transition"
+                      >
+                        {item.label}
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </nav>
+
+            {/* Mobile Nav (Sheet) */}
+            <div className="md:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <button className="p-2 rounded-md border border-gray-300">
+                    <MenuIcon className="w-5 h-5" />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="right">
+                  <SheetHeader>
+                    <SheetTitle>Menu</SheetTitle>
+                  </SheetHeader>
+                  <nav className="flex flex-col gap-4 mt-4 px-2">
+                    {[
+                      { href: "/", label: "Home" },
+                      { href: "/aboutme", label: "About Me" },
+                      { href: "/skill", label: "Skills" },
+                      { href: "/projects", label: "Projects" },
+                      { href: "/contact", label: "Contact" },
+                    ].map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="text-base text-gray-800 hover:text-blue-600 transition"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </nav>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </header>
 
-        {/* Page content */}
+        {/* MAIN */}
         <main className="pt-4">{children}</main>
 
+        {/* FOOTER */}
         <footer className="bg-gray-100 text-center py-4 mt-8 block">
-          footer
+          &copy; {new Date().getFullYear()} My Portfolio. All rights reserved.
         </footer>
       </body>
     </html>
