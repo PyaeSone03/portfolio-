@@ -82,6 +82,14 @@ const page = () => {
     },
     {
       image: "https://github.com/shadcn.png",
+      title: "Mobile App Design",
+      subTitle: "Fitness Tracker App",
+      description:
+        "UI/UX design and frontend development for a fitness tracking application",
+      tags: ["Figma", "React Native", "Firebase"],
+    },
+    {
+      image: "https://github.com/shadcn.png",
       title: "Data Dashboard",
       subTitle: "Analytics Dashboard",
       description:
@@ -238,7 +246,8 @@ const page = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-6">
+      <div className="mt-4 flex flex-wrap justify-center sm:justify-between gap-6">
+
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
