@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import {
   FileIcon,
@@ -26,13 +28,13 @@ const page = () => {
     },
     {
       name: "Boston University",
-      description: "Master's in Human-Computer Interaction.",
-      time: "2018 – 2020",
+      description: "Bachelor's in Computer Science.",
+      time: "2014 – 2018",
     },
     {
-      name: "Massachusetts Institute of Technology",
-      description: "Master's in Human-Computer Interaction.",
-      time: "2018 – 2020",
+      name: "Online Courses",
+      description: "Various professional development courses.",
+      time: "2021 – Present",
     },
   ];
   const certifications = [
@@ -43,65 +45,82 @@ const page = () => {
   ];
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-10">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-10 ">
       {/* Header Section */}
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 bg-green-50 rounded-lg px-6 py-10">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 rounded-lg px-6 py-10 bg-white dark:bg-black shadow-lg border border-black/10 dark:border-white/10">
         {/* Left - Avatar */}
         <div className="flex-1 basis-2/5 flex justify-center">
-          <Avatar className="h-48 w-48 border shadow-lg rounded-full overflow-hidden">
+          <Avatar className="h-48 w-48 border border-black/20 dark:border-white/20 shadow-lg rounded-full overflow-hidden">
             <AvatarImage src="https://github.com/shadcn.png" />
             <AvatarFallback>PS</AvatarFallback>
           </Avatar>
         </div>
 
         {/* Right - Info */}
-        <div className="flex-1 basis-3/5 space-y-5">
+        <div className="flex-1 basis-3/5 space-y-5 text-black dark:text-white">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-semibold tracking-tight">
-               Name
-            </h3>
+            <h3 className="text-2xl font-semibold tracking-tight">Name</h3>
             <div className="flex gap-2">
-              <Button variant="secondary" size="icon" className="size-8">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-black/30 dark:border-white/30 text-black dark:text-white"
+              >
                 <Linkedin />
               </Button>
-              <Button variant="secondary" size="icon" className="size-8">
+              <Button
+                variant="outline"
+                size="icon"
+                className="border-black/30 dark:border-white/30 text-black dark:text-white"
+              >
                 <GithubIcon />
               </Button>
             </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
-            <Button variant="outline">UX Designer</Button>
-            <Button variant="outline">Frontend Developer</Button>
-            <Button variant="outline">Digital Illustrator</Button>
+            <Button variant="outline" className="border-black/30 dark:border-white/30 text-black dark:text-white">
+              UX Designer
+            </Button>
+            <Button variant="outline" className="border-black/30 dark:border-white/30 text-black dark:text-white">
+              Frontend Developer
+            </Button>
+            <Button variant="outline" className="border-black/30 dark:border-white/30 text-black dark:text-white">
+              Digital Illustrator
+            </Button>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-gray-700">
+          <div className="flex items-center gap-2 text-sm text-black/80 dark:text-white/80">
             <MapPin className="w-4 h-4" />
             <span>San Francisco, California</span>
           </div>
 
-          <p className="text-muted-foreground text-base">
+          <p className="text-base leading-relaxed text-black/90 dark:text-white/90">
             I create user-centered digital experiences that solve real problems.
           </p>
         </div>
       </div>
 
-      <div className="border border-gray-200 rounded-lg p-6 shadow-sm bg-white space-y-6">
+      {/* About Me */}
+      <div className="border border-black/10 dark:border-white/10 rounded-lg p-6 shadow-sm space-y-6 bg-white dark:bg-black text-black dark:text-white">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold tracking-tight">About Me</h3>
-          <Button variant="secondary" size="icon" className="size-8">
+          <Button
+            variant="outline"
+            size="icon"
+            className="border-black/30 dark:border-white/30 text-black dark:text-white"
+          >
             <NotebookPenIcon />
           </Button>
         </div>
 
-        <div className="space-y-4 text-gray-700 text-sm">
+        <div className="space-y-4 text-sm text-black/80 dark:text-white/80">
           <div>
             <h4 className="text-xl font-semibold mb-1">Background</h4>
             <p className="leading-relaxed">
               Originally from Boston, I moved to San Francisco 5 years ago to
-              pursue my passion for technology and design. I&apos;m currently working
-              as a Senior UX Designer at TechVision, where I help create
+              pursue my passion for technology and design. I&apos;m currently
+              working as a Senior UX Designer at TechVision, where I help create
               intuitive digital products that enhance user experiences across
               various platforms.
             </p>
@@ -127,55 +146,67 @@ const page = () => {
         </div>
       </div>
 
+      {/* Education & Certifications */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6">
-        <Card className="flex-1">
+        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
-              <LibraryIcon className="w-8 h-8 text-gray-700" />
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+              <LibraryIcon className="w-8 h-8" />
               Education
             </CardTitle>
           </CardHeader>
 
           <CardContent className="grid grid-cols-1 gap-4">
             {education.map((edu, index) => (
-              <div key={index} className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
-                <p className="font-medium text-lg text-gray-900">{edu.name}</p>
-                <p className="text-sm text-muted-foreground">
-                  {edu.description}
-                </p>
-                <p className="text-sm text-muted-foreground">{edu.time}</p>
+              <div
+                key={index}
+                className="w-full bg-black/5 dark:bg-white/5 p-4 rounded-lg shadow-sm flex flex-col gap-2 text-black dark:text-white"
+              >
+                <p className="font-medium text-lg">{edu.name}</p>
+                <p className="text-sm">{edu.description}</p>
+                <p className="text-sm">{edu.time}</p>
               </div>
             ))}
           </CardContent>
         </Card>
-        <Card className="flex-1">
+
+        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
-              <LibraryIcon className="w-8 h-8 text-gray-700" />
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+              <LibraryIcon className="w-8 h-8" />
               Certifications
             </CardTitle>
           </CardHeader>
 
           <CardContent className="grid grid-cols-1 gap-4">
             {certifications.map((cert, index) => (
-              <div key={index} className="w-full bg-gray-100 p-4 rounded-lg shadow-sm flex flex-col gap-2">
-                <p className="font-medium text-lg text-gray-900">{cert.name}</p>
-                <p className="text-sm text-muted-foreground">{cert.time}</p>
+              <div
+                key={index}
+                className="w-full bg-black/5 dark:bg-white/5 p-4 rounded-lg shadow-sm flex flex-col gap-2 text-black dark:text-white"
+              >
+                <p className="font-medium text-lg">{cert.name}</p>
+                <p className="text-sm">{cert.time}</p>
               </div>
             ))}
           </CardContent>
         </Card>
       </div>
-      <div className="border border-gray-200 rounded-lg p-6 shadow-sm bg-white space-y-6">
+
+      {/* Resume Section */}
+      <div className="border border-black/10 dark:border-white/10 rounded-lg p-6 shadow-sm bg-white dark:bg-black space-y-6 text-black dark:text-white">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold tracking-tight">Resume</h3>
-          <Button variant="secondary" size="icon" className="size-8">
+          <Button
+            variant="outline"
+            size="icon"
+            className="border-black/30 dark:border-white/30 text-black dark:text-white"
+          >
             <NotebookPenIcon />
           </Button>
         </div>
 
-        <Card className="flex flex-col items-center text-center p-6 border border-dashed border-gray-300 space-y-4">
-          <CardContent className="bg-gray-700 p-6 rounded-lg shadow-sm text-white flex flex-col items-center justify-center space-y-2">
+        <Card className="flex flex-col items-center text-center p-6 border border-dashed border-black/20 dark:border-white/20 space-y-4 bg-black/5 dark:bg-white/5 rounded-lg">
+          <CardContent className="flex flex-col items-center justify-center space-y-2 text-black dark:text-white">
             <FilesIcon className="w-12 h-12" />
             <p>PDF</p>
           </CardContent>
@@ -183,15 +214,23 @@ const page = () => {
           <p className="text-sm font-medium">Alex_Johnson_Resume_2025.pdf</p>
 
           <div className="flex gap-2">
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-black/30 dark:border-white/30 text-black dark:text-white"
+            >
               <Linkedin className="w-4 h-4 mr-2" /> Preview
             </Button>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-black/30 dark:border-white/30 text-black dark:text-white"
+            >
               <FileIcon className="w-4 h-4 mr-2" /> Download
             </Button>
           </div>
 
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-black/60 dark:text-white/60">
             Last updated: June 15, 2025
           </p>
         </Card>

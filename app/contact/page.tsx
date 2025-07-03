@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Linkedin,
@@ -16,97 +17,177 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
-export default function Home() {
+const page = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const encodedSubject = encodeURIComponent(`${subject} - from ${email}`);
+      const encodedBody = encodeURIComponent(
+        `Name - ${name} \n
+        ${message}`
+      );
+
+      const mailtoLink = `mailto:xamer11285@decodewp.com?subject=${encodedSubject}&body=${encodedBody}`;
+
+      toast.success("Mail client opened. You can now send your message.");
+      window.location.href = mailtoLink;
+    } catch (error) {
+      console.error("Failed to open mail client:", error);
+      toast.error("Something went wrong. Please try again.");
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4 py-8">
-      <div className="mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 rounded-2xl p-10 shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black px-4 py-8">
+      <div className="mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 rounded-2xl p-10 shadow-lg bg-white dark:bg-black">
         {/* Left Side */}
         <div className="flex-1 w-full space-y-6">
-          <h1 className="text-4xl font-bold text-gray-800">
+          <h1 className="text-4xl font-bold text-black dark:text-white">
             Contact Information
           </h1>
 
-          <div className="space-y-4 text-gray-700 text-base">
+          <div className="space-y-4 text-black/80 dark:text-white/80 text-base">
             <div className="flex items-center gap-3">
-              <ChevronRightIcon className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800">Email: example@email.com</span>
+              <ChevronRightIcon className="w-5 h-5 text-black/50 dark:text-white/50" />
+              <span className="text-black dark:text-white">
+                Email: example@email.com
+              </span>
             </div>
             <div className="flex items-center gap-3">
-              <ChevronRightIcon className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-800">Phone: +1 (555) 123-4567</span>
+              <ChevronRightIcon className="w-5 h-5 text-black/50 dark:text-white/50" />
+              <span className="text-black dark:text-white">
+                Phone: +1 (555) 123-4567
+              </span>
             </div>
           </div>
 
           <div className="pt-6">
-            <p className="font-semibold text-gray-800 mb-3">Find Me Online</p>
+            <p className="font-semibold text-black dark:text-white mb-3">
+              Find Me Online
+            </p>
             <div className="flex gap-3">
-              <Button variant="secondary" size="icon" className="rounded-full">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+              >
                 <Linkedin className="w-5 h-5" />
               </Button>
-              <Button variant="secondary" size="icon" className="rounded-full">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+              >
                 <GithubIcon className="w-5 h-5" />
               </Button>
-              <Button variant="secondary" size="icon" className="rounded-full">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+              >
                 <FigmaIcon className="w-5 h-5" />
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Right Side - Contact Form Card */}
+        {/* Right Side - Contact Form */}
         <div className="flex-1 w-full max-w-md">
-          <Card className="w-full p-6 rounded-xl shadow-md bg-white">
+          <Card className="w-full p-6 rounded-xl shadow-md bg-white dark:bg-black border border-black/10 dark:border-white/10">
             <CardHeader className="mb-4">
-              <CardTitle className="text-2xl font-bold">Send a Message</CardTitle>
-              <CardDescription>
-                I&apos;d love to hear from you. Fill out the form below!
+              <CardTitle className="text-2xl font-bold text-black dark:text-white">
+                Send a Message
+              </CardTitle>
+              <CardDescription className="text-black/70 dark:text-white/70">
+                I'd love to hear from you. Fill out the form below!
               </CardDescription>
             </CardHeader>
 
             <CardContent>
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 {/* Name */}
                 <div className="grid gap-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-black dark:text-white">
+                    Name
+                  </Label>
                   <Input
                     id="name"
                     type="text"
                     placeholder="Your full name"
                     required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="border-black/30 dark:border-white/30 text-black dark:text-white"
                   />
-                  <p className="text-xs text-gray-500">Let me know who you are</p>
                 </div>
 
                 {/* Email */}
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-black dark:text-white">
+                    Email
+                  </Label>
                   <Input
                     id="email"
                     type="email"
                     placeholder="you@example.com"
                     required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="border-black/30 dark:border-white/30 text-black dark:text-white"
                   />
-                  <p className="text-xs text-gray-500">I’ll use this to get back to you</p>
+                </div>
+
+                {/* Subject */}
+                <div className="grid gap-2">
+                  <Label
+                    htmlFor="subject"
+                    className="text-black dark:text-white"
+                  >
+                    Subject
+                  </Label>
+                  <Input
+                    id="subject"
+                    type="text"
+                    placeholder="Subject of your message"
+                    required
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    className="border-black/30 dark:border-white/30 text-black dark:text-white"
+                  />
                 </div>
 
                 {/* Message */}
                 <div className="grid gap-2">
-                  <Label htmlFor="message">Message</Label>
+                  <Label
+                    htmlFor="message"
+                    className="text-black dark:text-white"
+                  >
+                    Message
+                  </Label>
                   <textarea
                     id="message"
                     rows={5}
                     placeholder="Type your message here..."
-                    className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="w-full rounded-md border border-black/30 dark:border-white/30 px-3 py-2 text-sm text-black dark:text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-black dark:focus:ring-white"
                   />
-                  <p className="text-xs text-gray-500">
-                    What would you like to talk about?
-                  </p>
                 </div>
 
                 {/* Submit Button */}
-                <Button type="submit" className="w-full">
+                <Button
+                  type="submit"
+                  className="w-full bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-300"
+                >
                   Send Message
                 </Button>
               </form>
@@ -116,4 +197,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default page;
