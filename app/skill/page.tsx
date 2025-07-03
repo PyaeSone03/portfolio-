@@ -14,6 +14,7 @@ import {
 import { Progress } from "@/components/ui/progress";
 import React from "react";
 import { CircularProgress } from "@/components/ui/CircularProgress";
+import Link from "next/link";
 
 const page = () => {
   const languages = [
@@ -229,16 +230,19 @@ const page = () => {
         </h1>
 
         <div className="flex items-center gap-1 text-sm font-medium text-black/70 dark:text-white/70 cursor-pointer hover:underline">
-          <span>View all projects</span>
-          <ArrowRightIcon className="w-4 h-4" />
+        <Link href={"/projects"} className="flex items-center gap-1">
+        <span>View all projects</span>
+        <ArrowRightIcon className="w-4 h-4" />
+        </Link>
+         
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-6 mt-4">
+      <div className="mt-4 flex flex-wrap justify-center sm:justify-start gap-6">
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-black p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-sm"
+            className="bg-white dark:bg-black p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-xs"
           >
             <div className="relative w-full">
               <img
@@ -250,16 +254,13 @@ const page = () => {
                 {skill.title}
               </p>
             </div>
-
-            <h3 className="text-lg font-semibold text-black dark:text-white">
+            <h3 className="text-base font-semibold text-black dark:text-white">
               {skill.subTitle}
             </h3>
-
             <p className="text-sm text-black/70 dark:text-white/70">
               {skill.description}
             </p>
-
-            <div className="flex gap-2 flex-wrap">
+            <div className="flex flex-wrap gap-2">
               {skill.tags.map((tag, tagIndex) => (
                 <Button
                   key={tagIndex}
