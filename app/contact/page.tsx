@@ -43,7 +43,7 @@ const Page = () => {
           // Fallback: copy mailtoLink to clipboard and notify user
           navigator.clipboard.writeText(mailtoLink).then(() => {
             toast.info(
-              "Could not open mail client automatically. Mailto link copied to clipboard."
+              "The system was unable to open the mail client. Please use your email to contact us."
             );
           });
         }
