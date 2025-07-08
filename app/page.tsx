@@ -16,9 +16,9 @@ export default function Home() {
           <h1 className="text-4xl font-bold tracking-tight text-black dark:text-white">
             Hello!
           </h1>
-          <h2 className="text-4xl font-bold tracking-tight text-black dark:text-white">
-            I'm Pyae Sone ikoL
-          </h2>
+            <h2 className="text-4xl font-bold tracking-tight text-black dark:text-white">
+            I&apos;m Pyae Sone
+            </h2>
           <p className="text-base text-black dark:text-white">
             Software Developer &amp; UI/UX Designer
           </p>
