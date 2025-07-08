@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Linkedin,
@@ -20,6 +20,21 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 const Page = () => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast("🚧 The portfolio is still under development! 🚧", {
+        style: {
+          borderRadius: "8px",
+          background: "#1a1a1a",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
+    }, 1000);
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -40,7 +55,6 @@ const Page = () => {
           toast.success("Mail client opened. You can now send your message.");
           newWindow.focus();
         } else {
-          
           toast.info(
             "The system was unable to open the mail client. Please use your email to contact us."
           );

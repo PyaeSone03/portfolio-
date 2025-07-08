@@ -10,11 +10,28 @@ import {
   MapPin,
   NotebookPenIcon,
 } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
 
 const page = () => {
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast("🚧 The portfolio is still under development! 🚧", {
+        style: {
+          borderRadius: "8px",
+          background: "#1a1a1a",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
+    }, 1000);
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
   const education = [
     {
       name: "Gusto University",

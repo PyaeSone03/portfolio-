@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Card,
   CardHeader,
@@ -12,16 +14,18 @@ import {
   ArrowRightIcon,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import React from "react";
+import { useEffect } from "react";
 import { CircularProgress } from "@/components/ui/CircularProgress";
 import Link from "next/link";
+import { toast } from "sonner";
+import React from "react";
 
-const page = () => {
+const Page: React.FC = () => {
   const languages = [
-    { name: "JavaScript", percentage: "", value: 90 },
-    { name: "TypeScript", percentage: "", value: 70 },
-    { name: "NodeJs / ExpressJs", percentage: "", value: 65 },
-    { name: "Python", percentage: "", value: 60 },
+    { name: "JavaScript", value: 90 },
+    { name: "TypeScript", value: 70 },
+    { name: "NodeJs / ExpressJs", value: 65 },
+    { name: "Python", value: 60 },
   ];
 
   const techSkills = [
@@ -53,21 +57,16 @@ const page = () => {
       description: "Finds solutions efficiently and creatively.",
       icon: LibraryIcon,
     },
-    {
-      name: "Problem Solving",
-      description: "Finds solutions efficiently and creatively.",
-      icon: LibraryIcon,
-    },
   ];
 
   const technicalSkills = [
     {
       image: "https://github.com/shadcn.png",
-      title: "E-commerce Platform",
-      subTitle: "Online Store Platform",
+      title: "Testing Framework",
+      subTitle: "Testing Framework",
       description:
-        "Full-stack e-commerce solution with React, Node.js and MongoDB",
-      tags: ["React", "Node.js", "MongoDB"],
+        "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      tags: ["React", "Node.js", ],
     },
     {
       image: "https://github.com/shadcn.png",
@@ -75,15 +74,7 @@ const page = () => {
       subTitle: "Fitness Tracker App",
       description:
         "UI/UX design and frontend development for a fitness tracking application",
-      tags: ["Figma", "React Native", "Firebase"],
-    },
-    {
-      image: "https://github.com/shadcn.png",
-      title: "Mobile App Design",
-      subTitle: "Fitness Tracker App",
-      description:
-        "UI/UX design and frontend development for a fitness tracking application",
-      tags: ["Figma", "React Native", "Firebase"],
+      tags: ["React Native", ],
     },
     {
       image: "https://github.com/shadcn.png",
@@ -91,9 +82,24 @@ const page = () => {
       subTitle: "Analytics Dashboard",
       description:
         "Interactive data visualization dashboard using Python and D3.js",
-      tags: ["Python", "D3.js", "Flask"],
+      tags: ["Python", ],
     },
   ];
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      toast("🚧 The portfolio is still under development! 🚧", {
+        style: {
+          borderRadius: "8px",
+          background: "#1a1a1a",
+          color: "#fff",
+          fontWeight: "bold",
+        },
+      });
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between h-auto">
@@ -123,16 +129,18 @@ const page = () => {
                     {lang.name}
                   </p>
                   <p className="text-lg font-semibold text-black/70 dark:text-white/70">
-                    {lang.percentage}
+                    {lang.value}%
                   </p>
                 </div>
                 <Progress
                   value={lang.value}
                   className="mt-2"
-                  style={{
-                    "--progress-bg": "rgba(0,0,0,0.1)",
-                    "--progress-fill": "black",
-                  } as React.CSSProperties}
+                  style={
+                    {
+                      "--progress-bg": "rgba(0,0,0,0.1)",
+                      "--progress-fill": "black",
+                    } as React.CSSProperties
+                  }
                 />
               </div>
             ))}
@@ -164,10 +172,12 @@ const page = () => {
                   <Progress
                     value={skill.progress}
                     className="mt-2"
-                    style={{
-                      "--progress-bg": "rgba(0,0,0,0.1)",
-                      "--progress-fill": "black",
-                    } as React.CSSProperties}
+                    style={
+                      {
+                        "--progress-bg": "rgba(0,0,0,0.1)",
+                        "--progress-fill": "black",
+                      } as React.CSSProperties
+                    }
                   />
                 </div>
               </div>
@@ -235,16 +245,14 @@ const page = () => {
         </h1>
 
         <div className="flex items-center gap-1 text-sm font-medium text-black/70 dark:text-white/70 cursor-pointer hover:underline">
-        <Link href={"/projects"} className="flex items-center gap-1">
-        <span>View all projects</span>
-        <ArrowRightIcon className="w-4 h-4" />
-        </Link>
-         
+          <Link href={"/projects"} className="flex items-center gap-1">
+            <span>View all projects</span>
+            <ArrowRightIcon className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
       <div className="mt-4 flex flex-wrap justify-center sm:justify-between gap-6">
-
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
@@ -285,4 +293,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
