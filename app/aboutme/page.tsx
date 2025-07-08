@@ -15,7 +15,7 @@ import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 
-const page = () => {
+const Page = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -264,4 +264,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
