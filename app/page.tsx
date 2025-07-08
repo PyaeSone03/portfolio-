@@ -32,7 +32,7 @@ export default function Home() {
             Hello!
           </h1>
           <h2 className="text-4xl font-bold tracking-tight text-black dark:text-white">
-            I'm Pyae Sone ikoL
+            I&apos;m Pyae Sone ikoL
           </h2>
           <p className="text-base text-black dark:text-white">
             Software Developer &amp; UI/UX Designer
