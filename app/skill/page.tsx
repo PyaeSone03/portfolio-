@@ -18,26 +18,23 @@ import Link from "next/link";
 
 const page = () => {
   const languages = [
-    { name: "JavaScript", percentage: "95%", value: 95 },
-    { name: "TypeScript", percentage: "90%", value: 90 },
-    { name: "Python", percentage: "85%", value: 85 },
-    { name: "C#", percentage: "75%", value: 75 },
+    { name: "JavaScript", percentage: "", value: 90 },
+    { name: "TypeScript", percentage: "", value: 70 },
+    { name: "NodeJs / ExpressJs", percentage: "", value: 65 },
+    { name: "Python", percentage: "", value: 60 },
   ];
 
   const techSkills = [
-    { name: "Apple", progress: 12, icon: AppleIcon },
-    { name: "Chrome", progress: 65, icon: AppleIcon },
-    { name: "Apple", progress: 80, icon: AppleIcon },
-    { name: "Apple", progress: 45, icon: AppleIcon },
-    { name: "Apple", progress: 90, icon: AppleIcon },
-    { name: "Apple", progress: 25, icon: AppleIcon },
+    { name: "ReactJs", progress: 12, icon: AppleIcon },
+    { name: "NextJS", progress: 65, icon: AppleIcon },
+    { name: "Tailwindcss", progress: 80, icon: AppleIcon },
+    { name: "MUI", progress: 45, icon: AppleIcon },
+    { name: "shadcn", progress: 90, icon: AppleIcon },
   ];
 
   const designTools = [
     { name: "Figma", progress: 75, icon: AppleIcon },
-    { name: "Adobe XD", progress: 60, icon: AppleIcon },
-    { name: "Sketch", progress: 50, icon: AppleIcon },
-    { name: "InVision", progress: 40, icon: AppleIcon },
+    { name: "PhotoShop", progress: 60, icon: AppleIcon },
   ];
 
   const softSkills = [
