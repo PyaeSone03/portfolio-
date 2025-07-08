@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Linkedin,
   GithubIcon,
-  FigmaIcon,
   ChevronRightIcon,
 } from "lucide-react";
 import {

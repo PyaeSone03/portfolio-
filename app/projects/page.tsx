@@ -2,7 +2,8 @@
 import { toast } from "sonner";
 import { useEffect } from "react";
 
-const page = () => {
+const Page = () => {
+
   useEffect(() => {
     const timer = setTimeout(() => {
       toast("🚧 The portfolio is still under development! 🚧", {
@@ -24,4 +25,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

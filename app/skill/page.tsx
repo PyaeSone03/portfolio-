@@ -8,10 +8,8 @@ import {
   AppleIcon,
   ArrowRightIcon,
   FigmaIcon,
-  AlignHorizontalDistributeEndIcon,
   LucidePanelsRightBottom,
   UsersIcon,
-  SpeakerIcon,
   MessageCircle,
   LightbulbIcon,
 } from "lucide-react";
@@ -31,7 +29,7 @@ const Page: React.FC = () => {
   ];
 
   const techSkills = [
-    { name: "ReactJs", progress: 87, icon: require("lucide-react").ReactIcon },
+    { name: "ReactJs", progress: 87, icon: AppleIcon },
     { name: "NextJS", progress: 65, icon: AppleIcon },
     { name: "Tailwindcss", progress: 78, icon: AppleIcon },
     { name: "MUI", progress: 45, icon: AppleIcon },

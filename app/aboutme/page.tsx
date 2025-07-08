@@ -10,7 +10,7 @@ import {
   MapPin,
   NotebookPenIcon,
 } from "lucide-react";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
