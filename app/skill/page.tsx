@@ -1,17 +1,19 @@
 "use client";
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-} from "@/components/ui/card";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   CodeXmlIcon,
   LibraryIcon,
   AppleIcon,
   ArrowRightIcon,
+  FigmaIcon,
+  AlignHorizontalDistributeEndIcon,
+  LucidePanelsRightBottom,
+  UsersIcon,
+  SpeakerIcon,
+  MessageCircle,
+  LightbulbIcon,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useEffect } from "react";
@@ -24,21 +26,22 @@ const Page: React.FC = () => {
   const languages = [
     { name: "JavaScript", value: 90 },
     { name: "TypeScript", value: 70 },
-    { name: "NodeJs / ExpressJs", value: 65 },
     { name: "Python", value: 60 },
+    { name: ".Net", value: 50 },
   ];
 
   const techSkills = [
-    { name: "ReactJs", progress: 12, icon: AppleIcon },
+    { name: "ReactJs", progress: 87, icon: require("lucide-react").ReactIcon },
     { name: "NextJS", progress: 65, icon: AppleIcon },
-    { name: "Tailwindcss", progress: 80, icon: AppleIcon },
+    { name: "Tailwindcss", progress: 78, icon: AppleIcon },
     { name: "MUI", progress: 45, icon: AppleIcon },
-    { name: "shadcn", progress: 90, icon: AppleIcon },
+    { name: "shadcn", progress: 75, icon: AppleIcon },
+    { name: "Express", progress: 60, icon: AppleIcon },
   ];
 
   const designTools = [
-    { name: "Figma", progress: 75, icon: AppleIcon },
-    { name: "PhotoShop", progress: 60, icon: AppleIcon },
+    { name: "Figma", progress: 75, icon: FigmaIcon },
+    { name: "Photoshop", progress: 60, icon: LucidePanelsRightBottom },
   ];
 
   const softSkills = [
@@ -50,12 +53,17 @@ const Page: React.FC = () => {
     {
       name: "Communication",
       description: "Communicates clearly and listens actively.",
-      icon: LibraryIcon,
+      icon: MessageCircle,
     },
     {
       name: "Problem Solving",
       description: "Finds solutions efficiently and creatively.",
-      icon: LibraryIcon,
+      icon: LightbulbIcon,
+    },
+    {
+      name: "Leadership",
+      description: "Guides teams with clarity, support, and vision.",
+      icon: UsersIcon,
     },
   ];
 
@@ -64,9 +72,8 @@ const Page: React.FC = () => {
       image: "https://github.com/shadcn.png",
       title: "Testing Framework",
       subTitle: "Testing Framework",
-      description:
-        "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      tags: ["React", "Node.js", ],
+      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      tags: ["React", "Node.js"],
     },
     {
       image: "https://github.com/shadcn.png",
@@ -74,7 +81,7 @@ const Page: React.FC = () => {
       subTitle: "Fitness Tracker App",
       description:
         "UI/UX design and frontend development for a fitness tracking application",
-      tags: ["React Native", ],
+      tags: ["React Native"],
     },
     {
       image: "https://github.com/shadcn.png",
@@ -82,7 +89,7 @@ const Page: React.FC = () => {
       subTitle: "Analytics Dashboard",
       description:
         "Interactive data visualization dashboard using Python and D3.js",
-      tags: ["Python", ],
+      tags: ["Python"],
     },
   ];
 
@@ -102,25 +109,26 @@ const Page: React.FC = () => {
   }, []);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 items-center justify-between h-auto">
-      <h1 className="text-lg font-semibold text-black dark:text-white">
-        My Technical Skills
-      </h1>
-      <p className="text-black/70 dark:text-white/70 text-sm mb-4">
-        A comprehensive overview of my programming languages, frameworks, tools,
-        and soft skills.
-      </p>
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      <div className="mt-4 mb-12 text-center sm:text-left">
+        <h1 className="text-lg font-semibold text-black dark:text-white">
+          My Technical Skills
+        </h1>
+        <p className="text-black/70 dark:text-white/70 text-sm mt-2">
+          A comprehensive overview of my programming languages, frameworks,
+          tools, and soft skills.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 gap-y-8 py-6">
         {/* Programming Languages */}
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
               <CodeXmlIcon className="w-8 h-8" />
               Programming Languages
             </CardTitle>
           </CardHeader>
-
           <CardContent>
             {languages.map((lang, index) => (
               <div key={index} className="mb-4">
@@ -128,17 +136,17 @@ const Page: React.FC = () => {
                   <p className="text-lg font-semibold text-black dark:text-white">
                     {lang.name}
                   </p>
-                  <p className="text-lg font-semibold text-black/70 dark:text-white/70">
+                  {/* <span className="text-sm text-muted-foreground">
                     {lang.value}%
-                  </p>
+                  </span> */}
                 </div>
                 <Progress
                   value={lang.value}
-                  className="mt-2"
+                  className="mt-2 h-2 rounded-full"
                   style={
                     {
-                      "--progress-bg": "rgba(0,0,0,0.1)",
-                      "--progress-fill": "black",
+                      "--progress-bg": "rgba(0,0,0,0.05)",
+                      "--progress-fill": "#8b5cf6", // violet-500
                     } as React.CSSProperties
                   }
                 />
@@ -148,23 +156,22 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Frameworks & Libraries */}
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
               <LibraryIcon className="w-8 h-8" />
               Frameworks &amp; Libraries
             </CardTitle>
           </CardHeader>
-
           <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {techSkills.map((skill, index) => (
               <div
                 key={index}
                 className="bg-black/5 dark:bg-white/10 p-4 rounded-lg flex gap-4 items-start"
               >
-                {React.createElement(skill.icon, {
+                {/* {React.createElement(skill.icon, {
                   className: "w-6 h-6 mt-1 text-black dark:text-white",
-                })}
+                })} */}
                 <div className="flex-1">
                   <p className="font-medium text-black dark:text-white">
                     {skill.name}
@@ -186,14 +193,14 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Design Tools */}
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
               <LibraryIcon className="w-8 h-8" />
               Design Tools
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center">
+          <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 place-items-center bg">
             {designTools.map((tool, index) => (
               <CircularProgress
                 key={index}
@@ -208,7 +215,7 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Soft Skills */}
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
               <LibraryIcon className="w-8 h-8" />
@@ -239,11 +246,10 @@ const Page: React.FC = () => {
       </div>
 
       {/* Projects Section */}
-      <div className="flex mt-4 items-center justify-between">
+      <div className="flex mt-8 items-center justify-between">
         <h1 className="text-lg font-semibold text-black dark:text-white">
           My Projects
         </h1>
-
         <div className="flex items-center gap-1 text-sm font-medium text-black/70 dark:text-white/70 cursor-pointer hover:underline">
           <Link href={"/projects"} className="flex items-center gap-1">
             <span>View all projects</span>
@@ -252,7 +258,7 @@ const Page: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap justify-center sm:justify-between gap-6">
+      <div className="mt-6 flex flex-wrap justify-center sm:justify-between gap-6">
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
