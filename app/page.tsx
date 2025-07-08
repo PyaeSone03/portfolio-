@@ -85,7 +85,7 @@ export default function Home() {
               </Button>
             </Link>
             <Link
-              href="https://linkedin.com/in/pyaesone" // ← replace with your real LinkedIn URL
+              href="https://www.linkedin.com/in/pyae-sone-ikol-4145a22a4/" // ← replace with your real LinkedIn URL
               target="_blank"
               rel="noopener noreferrer"
             >

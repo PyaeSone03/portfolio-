@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const Page = () => {
   useEffect(() => {
@@ -95,27 +96,32 @@ const Page = () => {
               Find Me Online
             </p>
             <div className="flex gap-3">
+            <Link
+              href="https://www.linkedin.com/in/pyae-sone-ikol-4145a22a4/" // ← replace with your real LinkedIn URL
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
-                variant="outline"
+                variant="secondary"
                 size="icon"
-                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+                className="size-8 text-black dark:text-white border-black dark:border-white"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin />
               </Button>
+            </Link>
+            <Link
+              href="https://github.com/PyaeSone03"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
-                variant="outline"
+                variant="secondary"
                 size="icon"
-                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+                className="size-8 text-black dark:text-white border-black dark:border-white"
               >
-                <GithubIcon className="w-5 h-5" />
+                <GithubIcon />
               </Button>
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-black/30 dark:border-white/30 text-black dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
-              >
-                <FigmaIcon className="w-5 h-5" />
-              </Button>
+            </Link>
             </div>
           </div>
         </div>
