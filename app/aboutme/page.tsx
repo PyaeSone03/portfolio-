@@ -9,7 +9,6 @@ import {
   Linkedin,
   MapPin,
   NotebookPenIcon,
-  View,
   ViewIcon,
 } from "lucide-react";
 import { useEffect } from "react";
