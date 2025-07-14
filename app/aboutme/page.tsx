@@ -9,6 +9,8 @@ import {
   Linkedin,
   MapPin,
   NotebookPenIcon,
+  View,
+  ViewIcon,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
@@ -235,19 +237,19 @@ const Page = () => {
           <div className="flex gap-2">
             {/* Preview Button */}
             <a
-             // href="/file/pyaesone_ikoL.pdf"
+             href="/file/pyaesone_ikoL.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
             >
-              <Linkedin className="w-4 h-4 mr-2" />
+              <ViewIcon className="w-4 h-4 mr-2" />
               Preview
             </a>
 
             {/* Download Button */}
             <a
              // href="/file/pyaesone_ikoL.pdf"
-             // download="PyaeSone_Resume.pdf"
+             download="PyaeSone_Resume.pdf"
               className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
             >
               <FileIcon className="w-4 h-4 mr-2" />
