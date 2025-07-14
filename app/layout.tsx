@@ -21,7 +21,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "next-themes";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
-import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +34,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "PyaeSone's Portfolio",
   description: "Personal portfolio built with Next.js and shadcn/ui",
 };
 

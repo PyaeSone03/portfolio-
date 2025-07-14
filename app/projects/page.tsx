@@ -2,7 +2,6 @@
 import { toast } from "sonner";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
 
 const Page = () => {
   const technicalSkills = [
