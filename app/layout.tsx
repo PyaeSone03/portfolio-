@@ -34,7 +34,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "...'s Portfolio",
+  title: "ikoL's Portfolio",
   description: "Personal portfolio built with Next.js and shadcn/ui",
 };
 
