@@ -68,26 +68,26 @@ const Page: React.FC = () => {
   const technicalSkills = [
     {
       image: "https://github.com/shadcn.png",
-      title: "Testing Framework",
-      subTitle: "Testing Framework",
-      description: "lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      tags: ["React", "Node.js"],
+      title: "Call Manahement System",
+      subTitle: "CMS",
+      description: "Call Management System helps you make calls and easily record customer information and call notes in one place.",
+      tags: ["React", ".net", "SSMS" , "MUI"],
     },
     {
       image: "https://github.com/shadcn.png",
-      title: "Mobile App Design",
-      subTitle: "Fitness Tracker App",
+      title: "Foodie-App",
+      subTitle: "Pos",
       description:
-        "UI/UX design and frontend development for a fitness tracking application",
-      tags: ["React Native"],
+        "Order App",
+      tags: ["ReactJs", "ExpressJs", "PostgreSql" , "MUI"],
     },
     {
       image: "https://github.com/shadcn.png",
-      title: "Data Dashboard",
-      subTitle: "Analytics Dashboard",
+      title: "MenuMate (Frontend)",
+      subTitle: "POS + Dashboard",
       description:
-        "Interactive data visualization dashboard using Python and D3.js",
-      tags: ["Python"],
+        "",
+      tags: ["NextJs(approuter)", "chadcn",],
     },
   ];
 

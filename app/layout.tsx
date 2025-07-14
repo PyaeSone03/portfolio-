@@ -21,6 +21,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "next-themes";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
+import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,7 +59,9 @@ export default function RootLayout({
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
               {/* Logo */}
               <div className="text-xl font-semibold text-black dark:text-white">
-                My Portfolio
+                <Avatar>
+                  <AvatarImage src="eye.svg"  className="h-12 w-12"/>
+                </Avatar>
               </div>
 
               {/* Desktop Nav */}
