@@ -21,11 +21,18 @@ const Page = () => {
       tags: ["ReactJs", "ExpressJs", "PostgreSql", "MUI"],
     },
     {
-      image: "https://github.com/shadcn.png",
+      image: "/MenuMate.png",
       title: "MenuMate (Frontend)",
       subTitle: "POS + Dashboard",
       description: "",
-      tags: ["NextJs(approuter)", "chadcn"],
+      tags: ["ReactJs","TanStackRouter","Axios", "chadcn"],
+    },
+    {
+      image: "/WeatherApp.png",
+      title: "Weather-app",
+      subTitle: "Wearher checker",
+      description: "",
+      tags: ["NextJs(AppRouter)","Axios", "Framer-motion", "chadcn", ""],
     },
   ];
   useEffect(() => {
@@ -40,14 +47,14 @@ const Page = () => {
       });
     }, 1000);
 
-    return () => clearTimeout(timer); // Cleanup the timer
+    return () => clearTimeout(timer);
   }, []);
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-10 ">
-      <div className="flex mt-8 items-center justify-between">
-        <h1 className="text-lg font-semibold text-black dark:text-white">
+      <div className="flex items-center justify-between">
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
           My Projects
-        </h1>
+        </h3>
       </div>
 
       <div className="mt-6 flex flex-wrap justify-center sm:justify-between gap-6">

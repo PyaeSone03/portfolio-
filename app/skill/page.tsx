@@ -70,24 +70,23 @@ const Page: React.FC = () => {
       image: "https://github.com/shadcn.png",
       title: "Call Manahement System",
       subTitle: "CMS",
-      description: "Call Management System helps you make calls and easily record customer information and call notes in one place.",
-      tags: ["React", ".net", "SSMS" , "MUI"],
+      description:
+        "Call Management System helps you make calls and easily record customer information and call notes in one place.",
+      tags: ["React", ".net", "SSMS", "MUI"],
     },
     {
       image: "https://github.com/shadcn.png",
       title: "Foodie-App",
       subTitle: "Pos",
-      description:
-        "Order App",
-      tags: ["ReactJs", "ExpressJs", "PostgreSql" , "MUI"],
+      description: "Order App",
+      tags: ["ReactJs", "ExpressJs", "PostgreSql", "MUI"],
     },
     {
       image: "https://github.com/shadcn.png",
       title: "MenuMate (Frontend)",
       subTitle: "POS + Dashboard",
-      description:
-        "",
-      tags: ["NextJs(approuter)", "chadcn",],
+      description: "",
+      tags: ["NextJs(approuter)", "chadcn"],
     },
   ];
 
@@ -108,10 +107,10 @@ const Page: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mt-4 mb-12 text-center sm:text-left">
-        <h1 className="text-lg font-semibold text-black dark:text-white">
+      <div className="text-center sm:text-left">
+        <h3 className="text-2xl font-semibold tracking-tight">
           My Technical Skills
-        </h1>
+        </h3>
         <p className="text-black/70 dark:text-white/70 text-sm mt-2">
           A comprehensive overview of my programming languages, frameworks,
           tools, and soft skills.
