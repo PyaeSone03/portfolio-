@@ -17,7 +17,6 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 
 const Page = () => {
-
   useEffect(() => {
     const timer = setTimeout(() => {
       toast("🚧 The portfolio is still under development! 🚧", {
@@ -39,10 +38,11 @@ const Page = () => {
       description: "Higher Diploma in Software Engineering.",
       time: "2021 – 2023",
     },
-    
+
     {
       name: "Online Courses (Bootcamps)",
-      description: "Various professional development courses. (ReactJs, Next.Js, NodeJs,)",
+      description:
+        "Various professional development courses. (ReactJs, Next.Js, NodeJs,)",
       time: "2022 – Present",
     },
   ];
@@ -236,7 +236,7 @@ const Page = () => {
           <div className="flex gap-2">
             {/* Preview Button */}
             <a
-             href="/file/pyaesone_ikoL.pdf"
+              href="/file/pyaesone_ikoL.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
@@ -247,8 +247,8 @@ const Page = () => {
 
             {/* Download Button */}
             <a
-             // href="/file/pyaesone_ikoL.pdf"
-             download="PyaeSone_Resume.pdf"
+              // href="/file/pyaesone_ikoL.pdf"
+              download="PyaeSone_Resume.pdf"
               className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
             >
               <FileIcon className="w-4 h-4 mr-2" />
@@ -266,3 +266,4 @@ const Page = () => {
 };
 
 export default Page;
+

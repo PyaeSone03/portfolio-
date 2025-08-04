@@ -79,13 +79,13 @@ const Page = () => {
             <div className="flex items-center gap-3">
               <ChevronRightIcon className="w-5 h-5 text-black/50 dark:text-white/50" />
               <span className="text-black dark:text-white">
-                Email: example@email.com
+                Email: peterpyaesone03@gmail.com
               </span>
             </div>
             <div className="flex items-center gap-3">
               <ChevronRightIcon className="w-5 h-5 text-black/50 dark:text-white/50" />
               <span className="text-black dark:text-white">
-                Phone: +1 (555) 123-4567
+                Phone: 09966073746
               </span>
             </div>
           </div>
