@@ -247,7 +247,7 @@ const Page = () => {
 
             {/* Download Button */}
             <a
-              // href="/file/pyaesone_ikoL.pdf"
+               href="/file/pyaesone_ikoL.pdf"
               download="PyaeSone_Resume.pdf"
               className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
             >
