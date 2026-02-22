@@ -22,6 +22,8 @@ import { ThemeProvider } from "next-themes";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
 import { Avatar, AvatarImage, AvatarFallback } from "@radix-ui/react-avatar";
+import { ReactBitsBackground } from "@/components/react-bits-background";
+import { ScrollGlitchController } from "@/components/scroll-glitch-controller";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,17 +56,22 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ReactBitsBackground />
+          <ScrollGlitchController />
+
           {/* HEADER */}
-          <header className="sticky top-0 z-[100] w-full border-b shadow-sm bg-white dark:bg-black dark:border-gray-800">
+          <header className="sticky top-0 z-[100] w-full glass-surface border-b">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
               {/* Logo */}
-              <div className="text-xl font-semibold text-black dark:text-white">
-                <Avatar>
-                  <AvatarFallback>
-                    <AvatarImage src="eye.svg" className="h-12 w-12" />
-                  </AvatarFallback>
+              <Link
+                href="/"
+                className="flex items-center text-xl font-semibold ink-strong"
+              >
+                <Avatar className="h-10 w-10 avatar-round overflow-hidden logo-spin">
+                  <AvatarFallback>PS</AvatarFallback>
+                  <AvatarImage src="/eye.svg" className="h-10 w-10" />
                 </Avatar>
-              </div>
+              </Link>
 
               {/* Desktop Nav */}
               <nav className="hidden md:flex">
@@ -80,7 +87,7 @@ export default function RootLayout({
                       <NavigationMenuItem key={item.href}>
                         <NavigationMenuLink
                           href={item.href}
-                          className="hover:text-black/70 dark:hover:text-white/70 transition text-black dark:text-white"
+                          className="transition ink-strong hover:opacity-70"
                         >
                           {item.label}
                         </NavigationMenuLink>
@@ -94,13 +101,13 @@ export default function RootLayout({
               <div className="md:hidden">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <button className="p-2 rounded-md border border-gray-300 dark:border-gray-700">
-                      <MenuIcon className="w-5 h-5 text-black dark:text-white" />
+                    <button className="p-2 rounded-md glass-soft">
+                      <MenuIcon className="w-5 h-5 ink-strong" />
                     </button>
                   </SheetTrigger>
                   <SheetContent
                     side="right"
-                    className="bg-white dark:bg-black text-black dark:text-white"
+                    className="glass-surface ink-strong"
                   >
                     <SheetHeader>
                       <SheetTitle>Menu</SheetTitle>
@@ -116,7 +123,7 @@ export default function RootLayout({
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="text-base hover:text-black/70 dark:hover:text-white/70 transition text-black dark:text-white"
+                          className="text-base transition ink-strong hover:opacity-70"
                         >
                           {item.label}
                         </Link>
@@ -129,7 +136,7 @@ export default function RootLayout({
           </header>
 
           {/* MAIN */}
-          <main className="relative">
+          <main className="relative glitch-shell">
             {children}
             <Toaster />
             {/* Floating Theme Toggle Button */}
@@ -140,7 +147,7 @@ export default function RootLayout({
 
           {/* FOOTER */}
           <Separator />
-          <footer className="bg-gray-100 dark:bg-black text-center py-4 text-black dark:text-white">
+          <footer className="glass-surface text-center py-4 ink-strong">
             &copy; {new Date().getFullYear()} My Portfolio. All rights reserved.
           </footer>
         </ThemeProvider>

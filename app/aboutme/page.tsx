@@ -22,8 +22,8 @@ const Page = () => {
       toast("🚧 The portfolio is still under development! 🚧", {
         style: {
           borderRadius: "8px",
-          background: "#1a1a1a",
-          color: "#fff",
+          background: "rgba(255,255,255,0.78)",
+          color: "#0f172a",
           fontWeight: "bold",
         },
       });
@@ -56,14 +56,14 @@ const Page = () => {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 space-y-10 ">
       {/* Header Section */}
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 rounded-lg px-6 py-10 bg-white dark:bg-black shadow-lg border border-black/10 dark:border-white/10">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 rounded-lg px-6 py-10 glass-surface shadow-lg border border-white/35 dark:border-white/15">
         {/* Left - Avatar */}
         <div className="flex-1 basis-2/5 flex justify-center">
-          <Avatar className="h-48 w-48 dark:border-white/20 shadow-lg rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-black">
+          <Avatar className="h-48 w-48 avatar-round overflow-hidden flex items-center justify-center">
             <AvatarImage
               src="/ps_face.svg"
               alt="Pyae Sone"
-              className="object-cover mx-auto"
+              className="object-cover mx-auto scale-105"
             />
 
             <AvatarFallback>PS</AvatarFallback>
@@ -71,7 +71,7 @@ const Page = () => {
         </div>
 
         {/* Right - Info */}
-        <div className="flex-1 basis-3/5 space-y-5 text-black dark:text-white">
+        <div className="flex-1 basis-3/5 space-y-5 ink-strong">
           <div className="flex items-center justify-between">
             <h3 className="text-2xl font-semibold tracking-tight">
               Pyae Sone, ikoL
@@ -80,14 +80,14 @@ const Page = () => {
               <Button
                 variant="outline"
                 size="icon"
-                className="border-black/30 dark:border-white/30 text-black dark:text-white"
+                className="border-white/40 dark:border-white/20 ink-strong"
               >
                 <Linkedin />
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="border-black/30 dark:border-white/30 text-black dark:text-white"
+                className="border-white/40 dark:border-white/20 ink-strong"
               >
                 <GithubIcon />
               </Button>
@@ -97,43 +97,43 @@ const Page = () => {
           <div className="flex flex-wrap gap-2">
             <Button
               variant="outline"
-              className="border-black/30 dark:border-white/30 text-black dark:text-white"
+              className="border-white/40 dark:border-white/20 ink-strong"
             >
               Software Developer
             </Button>
             <Button
               variant="outline"
-              className="border-black/30 dark:border-white/30 text-black dark:text-white"
+              className="border-white/40 dark:border-white/20 ink-strong"
             >
               UX Designer
             </Button>
           </div>
 
-          <div className="flex items-center gap-2 text-sm text-black/80 dark:text-white/80">
+          <div className="flex items-center gap-2 text-sm ink-soft">
             <MapPin className="w-4 h-4" />
             <span>Chiang Mai, Thailand</span>
           </div>
 
-          <p className="text-base leading-relaxed text-black/90 dark:text-white/90">
+          <p className="text-base leading-relaxed ink-soft">
             I create user-centered digital experiences that solve real problems.
           </p>
         </div>
       </div>
 
       {/* About Me */}
-      <div className="border border-black/10 dark:border-white/10 rounded-lg p-6 shadow-sm space-y-6 bg-white dark:bg-black text-black dark:text-white">
+      <div className="border border-white/35 dark:border-white/15 rounded-lg p-6 shadow-sm space-y-6 glass-surface ink-strong">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold tracking-tight">About Me</h3>
           <Button
             variant="outline"
             size="icon"
-            className="border-black/30 dark:border-white/30 text-black dark:text-white"
+            className="border-white/40 dark:border-white/20 ink-strong"
           >
             <NotebookPenIcon />
           </Button>
         </div>
 
-        <div className="space-y-4 text-sm text-black/80 dark:text-white/80">
+        <div className="space-y-4 text-sm ink-soft">
           <div>
             <h4 className="text-xl font-semibold mb-1">Background</h4>
             <p className="leading-relaxed">
@@ -168,9 +168,9 @@ const Page = () => {
 
       {/* Education & Certifications */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-6">
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-sm">
+        <Card className="flex-1 glass-surface border border-white/35 dark:border-white/15 shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <LibraryIcon className="w-8 h-8" />
               Education
             </CardTitle>
@@ -180,7 +180,7 @@ const Page = () => {
             {education.map((edu, index) => (
               <div
                 key={index}
-                className="w-full bg-black/5 dark:bg-white/5 p-4 rounded-lg shadow-sm flex flex-col gap-2 text-black dark:text-white"
+                className="w-full glass-soft p-4 rounded-lg shadow-sm flex flex-col gap-2 ink-strong"
               >
                 <p className="font-medium text-lg">{edu.name}</p>
                 <p className="text-sm">{edu.description}</p>
@@ -190,9 +190,9 @@ const Page = () => {
           </CardContent>
         </Card>
 
-        <Card className="flex-1 bg-white dark:bg-black border border-black/10 dark:border-white/10 shadow-sm">
+        <Card className="flex-1 glass-surface border border-white/35 dark:border-white/15 shadow-sm">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <LibraryIcon className="w-8 h-8" />
               Certifications
             </CardTitle>
@@ -202,7 +202,7 @@ const Page = () => {
             {certifications.map((cert, index) => (
               <div
                 key={index}
-                className="w-full bg-black/5 dark:bg-white/5 p-4 rounded-lg shadow-sm flex flex-col gap-2 text-black dark:text-white"
+                className="w-full glass-soft p-4 rounded-lg shadow-sm flex flex-col gap-2 ink-strong"
               >
                 <p className="font-medium text-lg">{cert.name}</p>
                 <p className="text-sm">{cert.time}</p>
@@ -213,20 +213,20 @@ const Page = () => {
       </div>
 
       {/* Resume Section */}
-      <div className="border border-black/10 dark:border-white/10 rounded-lg p-6 shadow-sm bg-white dark:bg-black space-y-6 text-black dark:text-white">
+      <div className="border border-white/35 dark:border-white/15 rounded-lg p-6 shadow-sm glass-surface space-y-6 ink-strong">
         <div className="flex items-center justify-between">
           <h3 className="text-2xl font-semibold tracking-tight">Resume</h3>
           <Button
             variant="outline"
             size="icon"
-            className="border-black/30 dark:border-white/30 text-black dark:text-white"
+            className="border-white/40 dark:border-white/20 ink-strong"
           >
             <NotebookPenIcon />
           </Button>
         </div>
 
-        <Card className="flex flex-col items-center text-center p-6 border border-dashed border-black/20 dark:border-white/20 space-y-4 bg-black/5 dark:bg-white/5 rounded-lg">
-          <CardContent className="flex flex-col items-center justify-center space-y-2 text-black dark:text-white">
+        <Card className="flex flex-col items-center text-center p-6 border border-dashed border-white/30 dark:border-white/15 space-y-4 glass-soft rounded-lg">
+          <CardContent className="flex flex-col items-center justify-center space-y-2 ink-strong">
             <FilesIcon className="w-12 h-12" />
             <p>PDF</p>
           </CardContent>
@@ -239,7 +239,7 @@ const Page = () => {
               href="/file/pyaesone_ikoL.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
+              className="inline-flex items-center px-3 py-2 text-sm border border-white/40 dark:border-white/20 ink-strong rounded-md hover:bg-white/25 dark:hover:bg-white/10"
             >
               <ViewIcon className="w-4 h-4 mr-2" />
               Preview
@@ -249,14 +249,14 @@ const Page = () => {
             <a
                href="/file/pyaesone_ikoL.pdf"
               download="PyaeSone_Resume.pdf"
-              className="inline-flex items-center px-3 py-2 text-sm border border-black/30 dark:border-white/30 text-black dark:text-white rounded-md hover:bg-black/5 dark:hover:bg-white/5"
+              className="inline-flex items-center px-3 py-2 text-sm border border-white/40 dark:border-white/20 ink-strong rounded-md hover:bg-white/25 dark:hover:bg-white/10"
             >
               <FileIcon className="w-4 h-4 mr-2" />
               Download
             </a>
           </div>
 
-          <p className="text-xs text-black/60 dark:text-white/60">
+          <p className="text-xs ink-soft">
             Last updated: June 15, 2025
           </p>
         </Card>
@@ -266,4 +266,3 @@ const Page = () => {
 };
 
 export default Page;
-

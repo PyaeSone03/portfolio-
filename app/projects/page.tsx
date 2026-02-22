@@ -40,8 +40,8 @@ const Page = () => {
       toast("🚧 The portfolio is still under development! 🚧", {
         style: {
           borderRadius: "8px",
-          background: "#1a1a1a",
-          color: "#fff",
+          background: "rgba(255,255,255,0.78)",
+          color: "#0f172a",
           fontWeight: "bold",
         },
       });
@@ -61,7 +61,7 @@ const Page = () => {
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-black p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-xs"
+            className="glass-surface p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-xs"
           >
             <div className="relative w-full">
               <img
@@ -69,14 +69,14 @@ const Page = () => {
                 alt={skill.title}
                 className="rounded-lg w-full h-48 object-cover"
               />
-              <p className="absolute bottom-2 left-2 z-10 bg-black text-white text-sm font-medium px-2 py-1 rounded">
+              <p className="absolute bottom-2 left-2 z-10 glass-soft text-slate-900 dark:text-slate-100 text-sm font-medium px-2 py-1 rounded">
                 {skill.title}
               </p>
             </div>
-            <h3 className="text-base font-semibold text-black dark:text-white">
+            <h3 className="text-base font-semibold ink-strong">
               {skill.subTitle}
             </h3>
-            <p className="text-sm text-black/70 dark:text-white/70">
+            <p className="text-sm ink-soft">
               {skill.description}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -85,7 +85,7 @@ const Page = () => {
                   key={tagIndex}
                   variant="outline"
                   size="sm"
-                  className="border-black/50 text-black dark:border-white/50 dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+                  className="border-white/40 dark:border-white/20 ink-strong hover:bg-white/25 dark:hover:bg-white/10"
                 >
                   {tag}
                 </Button>

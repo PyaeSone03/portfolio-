@@ -13,8 +13,8 @@ export default function Home() {
       toast("🚧 The portfolio is still under development! 🚧", {
         style: {
           borderRadius: "8px",
-          background: "#1a1a1a",
-          color: "#fff",
+          background: "rgba(255,255,255,0.78)",
+          color: "#0f172a",
           fontWeight: "bold",
         },
       });
@@ -24,21 +24,21 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-[90vh] items-center justify-center bg-white dark:bg-black">
+    <div className="flex min-h-[90vh] items-center justify-center bg-transparent">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between gap-8 rounded-lg py-8">
         {/* Left Side */}
         <div className="flex-1 w-full space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-black dark:text-white">
+          <h1 className="text-4xl font-bold tracking-tight ink-strong">
             Hello!
           </h1>
-          <h2 className="text-4xl font-bold tracking-tight text-black dark:text-white">
+          <h2 className="text-4xl font-bold tracking-tight ink-strong">
             I&apos;m Pyae Sone ikoL
           </h2>
-          <p className="text-base text-black dark:text-white">
+          <p className="text-base ink-strong">
             Software Developer &amp; UI/UX Designer
           </p>
 
-          <div className="flex gap-4 text-sm text-gray-800 dark:text-gray-300 flex-wrap">
+          <div className="flex gap-4 text-sm ink-soft flex-wrap">
             <div>🔥 Passionate about clean UI</div>
             <div>🎯 Focused on performance</div>
           </div>
@@ -47,20 +47,20 @@ export default function Home() {
             <Link href="/contact" passHref>
               <Button
                 variant="outline"
-                className="text-black dark:text-white border-black dark:border-white"
+                className="ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
               >
                 Contact Me
               </Button>
             </Link>
             <Button
               variant="outline"
-              className="text-black dark:text-white border-black dark:border-white"
+              className="ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
               onClick={() =>
                 toast("🎉 Gotcha! You clicked it 😎", {
                   style: {
                     borderRadius: "8px",
-                    background: "#1a1a1a",
-                    color: "#fff",
+                    background: "rgba(255,255,255,0.78)",
+                    color: "#0f172a",
                     fontWeight: "bold",
                   },
                 })
@@ -79,7 +79,7 @@ export default function Home() {
               <Button
                 variant="secondary"
                 size="icon"
-                className="size-8 text-black dark:text-white border-black dark:border-white"
+                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
               >
                 <GithubIcon />
               </Button>
@@ -92,7 +92,7 @@ export default function Home() {
               <Button
                 variant="secondary"
                 size="icon"
-                className="size-8 text-black dark:text-white border-black dark:border-white"
+                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
               >
                 <Linkedin />
               </Button>
@@ -102,9 +102,13 @@ export default function Home() {
 
         {/* Right Side - Avatar */}
         <div className="flex-1 flex justify-center mt-8 md:mt-0">
-          <Avatar className="h-100 w-100">
-            <AvatarImage src="/ps.svg" alt="Pyae Sone" />
-            <AvatarFallback className="text-black dark:text-white">
+          <Avatar className="h-100 w-100 avatar-panel">
+            <AvatarImage
+              src="/ps.svg"
+              alt="Pyae Sone"
+              className="object-contain p-2"
+            />
+            <AvatarFallback className="ink-strong">
               PS
             </AvatarFallback>
           </Avatar>

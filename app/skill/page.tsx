@@ -5,22 +5,40 @@ import { Button } from "@/components/ui/button";
 import {
   CodeXmlIcon,
   LibraryIcon,
-  AppleIcon,
   ArrowRightIcon,
   FigmaIcon,
   LucidePanelsRightBottom,
   UsersIcon,
   MessageCircle,
   LightbulbIcon,
+  Atom,
+  FileCode2,
+  Wind,
+  PanelsTopLeft,
+  Blocks,
+  Server,
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CircularProgress } from "@/components/ui/CircularProgress";
 import Link from "next/link";
 import { toast } from "sonner";
 import React from "react";
 
 const Page: React.FC = () => {
+  const pageRef = useRef<HTMLDivElement | null>(null);
+  const frameworkRef = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const targetEnergyRef = useRef(0);
+  const currentEnergyRef = useRef(0);
+  const lastScrollYRef = useRef(0);
+  const activeTechTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+
+  const [activeTechIndex, setActiveTechIndex] = useState<number | null>(null);
+  const [glitchSeed, setGlitchSeed] = useState(0);
+
   const languages = [
     { name: "JavaScript", value: 90 },
     { name: "TypeScript", value: 70 },
@@ -29,12 +47,12 @@ const Page: React.FC = () => {
   ];
 
   const techSkills = [
-    { name: "ReactJs", progress: 87, icon: AppleIcon },
-    { name: "NextJS", progress: 65, icon: AppleIcon },
-    { name: "Tailwindcss", progress: 78, icon: AppleIcon },
-    { name: "MUI", progress: 45, icon: AppleIcon },
-    { name: "shadcn", progress: 75, icon: AppleIcon },
-    { name: "Express", progress: 60, icon: AppleIcon },
+    { name: "ReactJs", progress: 87, icon: Atom },
+    { name: "NextJS", progress: 65, icon: FileCode2 },
+    { name: "Tailwindcss", progress: 78, icon: Wind },
+    { name: "MUI", progress: 45, icon: PanelsTopLeft },
+    { name: "shadcn", progress: 75, icon: Blocks },
+    { name: "Express", progress: 60, icon: Server },
   ];
 
   const designTools = [
@@ -95,8 +113,8 @@ const Page: React.FC = () => {
       toast("🚧 The portfolio is still under development! 🚧", {
         style: {
           borderRadius: "8px",
-          background: "#1a1a1a",
-          color: "#fff",
+          background: "rgba(255,255,255,0.78)",
+          color: "#0f172a",
           fontWeight: "bold",
         },
       });
@@ -105,13 +123,106 @@ const Page: React.FC = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const pageNode = pageRef.current;
+    lastScrollYRef.current = window.scrollY;
+
+    const onScroll = () => {
+      const delta = Math.abs(window.scrollY - lastScrollYRef.current);
+      lastScrollYRef.current = window.scrollY;
+
+      targetEnergyRef.current = Math.min(
+        1,
+        targetEnergyRef.current + delta / 220 + 0.08
+      );
+      setGlitchSeed((prev) => prev + 1);
+
+      const frameworkRect = frameworkRef.current?.getBoundingClientRect();
+      const inFrameworkViewport =
+        frameworkRect &&
+        frameworkRect.top < window.innerHeight * 0.86 &&
+        frameworkRect.bottom > window.innerHeight * 0.2;
+
+      if (inFrameworkViewport) {
+        const nextIndex = Math.floor(Math.random() * techSkills.length);
+        setActiveTechIndex(nextIndex);
+
+        if (activeTechTimeoutRef.current) {
+          clearTimeout(activeTechTimeoutRef.current);
+        }
+
+        activeTechTimeoutRef.current = setTimeout(() => {
+          setActiveTechIndex(null);
+        }, 260 + Math.floor(Math.random() * 220));
+      }
+    };
+
+    const frame = () => {
+      targetEnergyRef.current *= 0.9;
+      currentEnergyRef.current +=
+        (targetEnergyRef.current - currentEnergyRef.current) * 0.18;
+
+      const energy = currentEnergyRef.current;
+      const node = pageNode;
+
+      if (node) {
+        node.style.setProperty("--scroll-energy", energy.toFixed(3));
+        node.style.setProperty("--scroll-shift", `${(energy * 8).toFixed(2)}px`);
+
+        if (energy > 0.02) {
+          node.classList.add("skill-scroll-glitch");
+        } else {
+          node.classList.remove("skill-scroll-glitch");
+        }
+      }
+
+      rafRef.current = window.requestAnimationFrame(frame);
+    };
+
+    rafRef.current = window.requestAnimationFrame(frame);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafRef.current) {
+        window.cancelAnimationFrame(rafRef.current);
+      }
+      if (activeTechTimeoutRef.current) {
+        clearTimeout(activeTechTimeoutRef.current);
+      }
+      pageNode?.classList.remove("skill-scroll-glitch");
+    };
+  }, [techSkills.length]);
+
+  const glitchStyle = (key: string): React.CSSProperties => {
+    const raw = [...`${key}-${glitchSeed}`].reduce(
+      (acc, char) => acc + char.charCodeAt(0),
+      0
+    );
+
+    const hue = ((raw % 40) - 20) * 1.2;
+    const sat = 1.15 + (raw % 10) / 30;
+    const contrast = 1.2 + (raw % 8) / 20;
+    const shift = ((raw % 9) - 4) * 0.5;
+
+    return {
+      "--pg-hue": `${hue}deg`,
+      "--pg-sat": `${sat}`,
+      "--pg-contrast": `${contrast}`,
+      "--pg-shift": `${shift}px`,
+    } as React.CSSProperties;
+  };
+
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+    <div
+      ref={pageRef}
+      className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10"
+    >
       <div className="text-center sm:text-left">
         <h3 className="text-2xl font-semibold tracking-tight">
           My Technical Skills
         </h3>
-        <p className="text-black/70 dark:text-white/70 text-sm mt-2">
+        <p className="ink-soft text-sm mt-2">
           A comprehensive overview of my programming languages, frameworks,
           tools, and soft skills.
         </p>
@@ -119,9 +230,9 @@ const Page: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 gap-y-8 py-6">
         {/* Programming Languages */}
-        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="glass-surface border border-white/35 dark:border-white/15">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <CodeXmlIcon className="w-8 h-8" />
               Programming Languages
             </CardTitle>
@@ -130,7 +241,7 @@ const Page: React.FC = () => {
             {languages.map((lang, index) => (
               <div key={index} className="mb-4">
                 <div className="flex items-center justify-between">
-                  <p className="text-lg font-semibold text-black dark:text-white">
+                  <p className="text-lg font-semibold ink-strong">
                     {lang.name}
                   </p>
                   {/* <span className="text-sm text-muted-foreground">
@@ -140,12 +251,7 @@ const Page: React.FC = () => {
                 <Progress
                   value={lang.value}
                   className="mt-2 h-2 rounded-full"
-                  style={
-                    {
-                      "--progress-bg": "rgba(0,0,0,0.05)",
-                      "--progress-fill": "#8b5cf6", // violet-500
-                    } as React.CSSProperties
-                  }
+                  style={glitchStyle(`lang-${lang.name}`)}
                 />
               </div>
             ))}
@@ -153,35 +259,37 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Frameworks & Libraries */}
-        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="glass-surface border border-white/35 dark:border-white/15">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <LibraryIcon className="w-8 h-8" />
               Frameworks &amp; Libraries
             </CardTitle>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <CardContent
+            ref={frameworkRef}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
             {techSkills.map((skill, index) => (
               <div
                 key={index}
-                className="bg-black/5 dark:bg-white/10 p-4 rounded-lg flex gap-4 items-start"
+                className={`glass-soft p-4 rounded-lg flex gap-4 items-start skill-tech-card ${
+                  activeTechIndex === index ? "tech-glitch-active" : ""
+                }`}
               >
-                {/* {React.createElement(skill.icon, {
-                  className: "w-6 h-6 mt-1 text-black dark:text-white",
-                })} */}
-                <div className="flex-1">
-                  <p className="font-medium text-black dark:text-white">
+                <div className="tech-icon-wrap">
+                  {React.createElement(skill.icon, {
+                    className: "w-8 h-8",
+                  })}
+                </div>
+                <div className="flex-1 tech-label-wrap">
+                  <p className="font-medium ink-strong">
                     {skill.name}
                   </p>
                   <Progress
                     value={skill.progress}
                     className="mt-2"
-                    style={
-                      {
-                        "--progress-bg": "rgba(0,0,0,0.1)",
-                        "--progress-fill": "black",
-                      } as React.CSSProperties
-                    }
+                    style={glitchStyle(`tech-${skill.name}`)}
                   />
                 </div>
               </div>
@@ -190,9 +298,9 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Design Tools */}
-        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="glass-surface border border-white/35 dark:border-white/15">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <LibraryIcon className="w-8 h-8" />
               Design Tools
             </CardTitle>
@@ -204,7 +312,7 @@ const Page: React.FC = () => {
                 value={tool.progress}
                 name={tool.name}
                 icon={React.createElement(tool.icon, {
-                  className: "w-5 h-5 text-black dark:text-white",
+                  className: "w-5 h-5 ink-strong",
                 })}
               />
             ))}
@@ -212,9 +320,9 @@ const Page: React.FC = () => {
         </Card>
 
         {/* Soft Skills */}
-        <Card className="bg-white dark:bg-black border border-black/10 dark:border-white/10">
+        <Card className="glass-surface border border-white/35 dark:border-white/15">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight text-black dark:text-white">
+            <CardTitle className="flex items-center gap-2 text-2xl font-semibold tracking-tight ink-strong">
               <LibraryIcon className="w-8 h-8" />
               Soft Skills
             </CardTitle>
@@ -223,17 +331,17 @@ const Page: React.FC = () => {
             {softSkills.map((skill, index) => (
               <div
                 key={index}
-                className="w-full bg-black/5 dark:bg-white/10 p-4 rounded-lg shadow-sm flex flex-col gap-1"
+                className="w-full glass-soft p-4 rounded-lg shadow-sm flex flex-col gap-1"
               >
                 <div className="flex items-center gap-2">
                   {React.createElement(skill.icon, {
-                    className: "w-5 h-5 text-black dark:text-white",
+                    className: "w-5 h-5 ink-strong",
                   })}
-                  <p className="font-medium text-lg text-black dark:text-white">
+                  <p className="font-medium text-lg ink-strong">
                     {skill.name}
                   </p>
                 </div>
-                <p className="text-sm text-black/70 dark:text-white/70">
+                <p className="text-sm ink-soft">
                   {skill.description}
                 </p>
               </div>
@@ -244,10 +352,10 @@ const Page: React.FC = () => {
 
       {/* Projects Section */}
       <div className="flex mt-8 items-center justify-between">
-        <h1 className="text-lg font-semibold text-black dark:text-white">
+        <h1 className="text-lg font-semibold ink-strong">
           My Projects
         </h1>
-        <div className="flex items-center gap-1 text-sm font-medium text-black/70 dark:text-white/70 cursor-pointer hover:underline">
+        <div className="flex items-center gap-1 text-sm font-medium ink-soft cursor-pointer hover:underline">
           <Link href={"/projects"} className="flex items-center gap-1">
             <span>View all projects</span>
             <ArrowRightIcon className="w-4 h-4" />
@@ -259,7 +367,7 @@ const Page: React.FC = () => {
         {technicalSkills.map((skill, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-black p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-xs"
+            className="glass-surface p-4 rounded-lg shadow-sm flex flex-col gap-3 w-full max-w-xs"
           >
             <div className="relative w-full">
               <img
@@ -267,14 +375,14 @@ const Page: React.FC = () => {
                 alt={skill.title}
                 className="rounded-lg w-full h-48 object-cover"
               />
-              <p className="absolute bottom-2 left-2 z-10 bg-black text-white text-sm font-medium px-2 py-1 rounded">
+              <p className="absolute bottom-2 left-2 z-10 glass-soft text-slate-900 dark:text-slate-100 text-sm font-medium px-2 py-1 rounded">
                 {skill.title}
               </p>
             </div>
-            <h3 className="text-base font-semibold text-black dark:text-white">
+            <h3 className="text-base font-semibold ink-strong">
               {skill.subTitle}
             </h3>
-            <p className="text-sm text-black/70 dark:text-white/70">
+            <p className="text-sm ink-soft">
               {skill.description}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -283,7 +391,7 @@ const Page: React.FC = () => {
                   key={tagIndex}
                   variant="outline"
                   size="sm"
-                  className="border-black/50 text-black dark:border-white/50 dark:text-white hover:bg-black/10 dark:hover:bg-white/10"
+                  className="border-white/40 dark:border-white/20 ink-strong hover:bg-white/25 dark:hover:bg-white/10"
                 >
                   {tag}
                 </Button>
