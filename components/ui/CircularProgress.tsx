@@ -1,5 +1,4 @@
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useId } from "react";
 
 type CircularProgressProps = {
   value: number;
@@ -12,71 +11,56 @@ type CircularProgressProps = {
 export const CircularProgress = ({
   value,
   name,
-  size = 80,
+  size = 88,
   stroke = 8,
   icon,
 }: CircularProgressProps) => {
+  const gradientId = useId();
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (value / 100) * circumference;
 
   return (
-    <Card className="w-full max-w-[160px] rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-      {name && (
-        <CardHeader className="flex justify-center items-center">
-          <CardTitle className="text-sm font-semibold text-center bg-gradient-to-r text-foreground px-3 py-1 rounded-full shadow-sm">
-            {name}
-          </CardTitle>
-        </CardHeader>
-      )}
+    <div className="flex w-full flex-col items-center gap-3 rounded-xl border bg-background/40 p-4">
+      <div
+        className="relative flex items-center justify-center"
+        style={{ width: size, height: size }}
+      >
+        <svg width={size} height={size} className="-rotate-90">
+          <defs>
+            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="var(--brand)" />
+              <stop offset="100%" stopColor="var(--brand-2)" />
+            </linearGradient>
+          </defs>
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="var(--muted)"
+            strokeWidth={stroke}
+            fill="none"
+          />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={`url(#${gradientId})`}
+            strokeWidth={stroke}
+            fill="none"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            style={{ transition: "stroke-dashoffset 0.6s ease" }}
+          />
+        </svg>
 
-      <CardContent className="flex flex-col items-center gap-2">
-        <div
-          className="relative flex items-center justify-center"
-          style={{ width: size, height: size }}
-        >
-          <svg width={size} height={size} className="-rotate-90">
-            <circle
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              stroke="#2e2e2e"
-              strokeWidth={stroke}
-              fill="none"
-            />
-            <circle
-              cx={size / 2}
-              cy={size / 2}
-              r={radius}
-              stroke="#e5e5e5"
-              strokeWidth={stroke}
-              fill="none"
-              strokeDasharray={circumference}
-              strokeDashoffset={offset}
-              strokeLinecap="round"
-              style={{ transition: "stroke-dashoffset 0.6s ease" }}
-            />
-            <defs>
-              <linearGradient
-                id="progressGradient"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop offset="0%" stopColor="#6366f1" />
-                <stop offset="100%" stopColor="#a855f7" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <div className="absolute inset-0 flex items-center justify-center">
-            {icon}
-          </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          {icon}
         </div>
+      </div>
 
-        {/* <p className="text-xs text-muted-foreground">{value}%</p> */}
-      </CardContent>
-    </Card>
+      {name && <p className="text-sm font-medium">{name}</p>}
+    </div>
   );
 };

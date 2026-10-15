@@ -1,119 +1,95 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Linkedin, GithubIcon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { toast } from "sonner";
-import { useEffect } from "react";
+import { ArrowRight, GithubIcon, Linkedin, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useDevToast } from "@/hooks/use-dev-toast";
+import { projects } from "@/lib/projects";
+import { site } from "@/lib/site";
+
+const highlights = [
+  { value: "~2 yrs", label: "Experience" },
+  { value: String(projects.length), label: "Projects" },
+  { value: "UI/UX", label: "Design-led" },
+];
 
 export default function Home() {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      toast("🚧 The portfolio is still under development! 🚧", {
-        style: {
-          borderRadius: "8px",
-          background: "rgba(255,255,255,0.78)",
-          color: "#0f172a",
-          fontWeight: "bold",
-        },
-      });
-    }, 1000);
-
-    return () => clearTimeout(timer); // Cleanup the timer
-  }, []);
+  useDevToast();
 
   return (
-    <div className="flex min-h-[90vh] items-center justify-center bg-transparent">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between gap-8 rounded-lg py-8">
-        {/* Left Side */}
-        <div className="flex-1 w-full space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight ink-strong">
-            Hello!
-          </h1>
-          <h2 className="text-4xl font-bold tracking-tight ink-strong">
-            I&apos;m Pyae Sone ikoL
-          </h2>
-          <p className="text-base ink-strong">
-            Software Developer &amp; UI/UX Designer
-          </p>
+    <section className="mx-auto flex min-h-[calc(100vh-10rem)] max-w-5xl items-center px-4 py-16">
+      <div className="w-full">
+        <div className="fade-up max-w-3xl space-y-7">
+          <span className="eyebrow">
+            <span className="size-2 rounded-full bg-zinc-200 shadow-[0_0_8px] shadow-white/70" />
+            Available for freelance work
+          </span>
 
-          <div className="flex gap-4 text-sm ink-soft flex-wrap">
-            <div>🔥 Passionate about clean UI</div>
-            <div>🎯 Focused on performance</div>
+          <div className="space-y-3">
+            <h1 className="text-5xl font-semibold tracking-tight sm:text-7xl">
+              Hi, I&apos;m{" "}
+              <span className="text-gradient">{site.name}</span>
+            </h1>
+            <p className="max-w-lg text-lg text-muted-foreground">
+              {site.role}. I build clean, fast interfaces that people enjoy
+              using.
+            </p>
           </div>
 
-          <div className="flex gap-2 flex-wrap">
-            <Link href="/contact" passHref>
-              <Button
-                variant="outline"
-                className="ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              >
-                Contact Me
-              </Button>
-            </Link>
-            <Button
-              variant="outline"
-              className="ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              onClick={() =>
-                toast("🎉 Gotcha! You clicked it 😎", {
-                  style: {
-                    borderRadius: "8px",
-                    background: "rgba(255,255,255,0.78)",
-                    color: "#0f172a",
-                    fontWeight: "bold",
-                  },
-                })
-              }
-            >
-              Click to know more
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg" className="rounded-full">
+              <Link href="/contact">
+                Contact me <ArrowRight />
+              </Link>
             </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="rounded-full bg-background/40 backdrop-blur"
+            >
+              <Link href="/aboutme">
+                <Sparkles /> Click to know more
+              </Link>
+            </Button>
+            <div className="flex gap-1">
+              {[
+                { href: site.github, label: "GitHub", icon: GithubIcon },
+                { href: site.linkedin, label: "LinkedIn", icon: Linkedin },
+              ].map(({ href, label, icon: Icon }) => (
+                <Button
+                  key={label}
+                  asChild
+                  size="icon"
+                  variant="ghost"
+                  className="size-10 rounded-full"
+                >
+                  <Link
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                  >
+                    <Icon />
+                  </Link>
+                </Button>
+              ))}
+            </div>
           </div>
 
-          <div className="flex gap-2">
-            <Link
-              href="https://github.com/PyaeSone03"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                size="icon"
-                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              >
-                <GithubIcon />
-              </Button>
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/pyae-sone-ikol-4145a22a4/" // ← replace with your real LinkedIn URL
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                size="icon"
-                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              >
-                <Linkedin />
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Right Side - Avatar */}
-        <div className="flex-1 flex justify-center mt-8 md:mt-0">
-          <Avatar className="h-100 w-100 avatar-panel">
-            <AvatarImage
-              src="/ps.svg"
-              alt="Pyae Sone"
-              className="object-contain p-2"
-            />
-            <AvatarFallback className="ink-strong">
-              PS
-            </AvatarFallback>
-          </Avatar>
+          <dl className="grid max-w-lg grid-cols-3 gap-3 pt-2">
+            {highlights.map((item) => (
+              <div key={item.label} className="glass rounded-xl px-4 py-3">
+                <dt className="sr-only">{item.label}</dt>
+                <dd className="text-xl font-semibold tracking-tight">
+                  {item.value}
+                </dd>
+                <dd className="text-xs text-muted-foreground">{item.label}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

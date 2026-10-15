@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    // Placeholder project images are served from github.com.
+    remotePatterns: [{ protocol: "https", hostname: "github.com" }],
+  },
 };
 
 export default nextConfig;

@@ -1,44 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Link from "next/link";
+import { GithubIcon, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
-import {
-  Linkedin,
-  GithubIcon,
-  ChevronRightIcon,
-} from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-import Link from "next/link";
+import { PageHeader } from "@/components/page-header";
+import { useDevToast } from "@/hooks/use-dev-toast";
+import { site } from "@/lib/site";
+
+const inputClass = "h-11 rounded-xl bg-background/50";
 
 const Page = () => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      toast("🚧 The portfolio is still under development! 🚧", {
-        style: {
-          borderRadius: "8px",
-          background: "rgba(255,255,255,0.78)",
-          color: "#0f172a",
-          fontWeight: "bold",
-        },
-      });
-    }, 1000);
-
-    return () => clearTimeout(timer); // Cleanup the timer
-  }, []);
+  useDevToast();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -46,180 +28,141 @@ const Page = () => {
       const encodedSubject = encodeURIComponent(`${subject} - from ${email}`);
       const encodedBody = encodeURIComponent(`Name - ${name}\n${message}`);
 
-      const mailtoLink = `mailto:xamer11285@decodewp.com?subject=${encodedSubject}&body=${encodedBody}`;
-
-      if (typeof window !== "undefined") {
-        const newWindow = window.open(mailtoLink);
-
-        if (newWindow) {
-          toast.success("Mail client opened. You can now send your message.");
-          newWindow.focus();
-        } else {
-          toast.info(
-            "The system was unable to open the mail client. Please use your email to contact us."
-          );
-        }
-      }
+      // window.open() returns null for mailto: links even when the mail
+      // client opens, so navigate to the link instead.
+      window.location.href = `mailto:${site.email}?subject=${encodedSubject}&body=${encodedBody}`;
+      toast.success("Opening your mail client so you can send the message.");
     } catch (error) {
       console.error("Failed to open mail client:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };
 
+  const details = [
+    { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
+    { icon: Phone, label: "Phone", value: site.phone, href: `tel:${site.phone}` },
+    { icon: MapPin, label: "Location", value: site.location },
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-transparent px-4 py-8">
-      <div className="mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-10 rounded-2xl p-10 shadow-lg glass-surface">
-        {/* Left Side */}
-        <div className="flex-1 w-full space-y-6">
-          <h1 className="text-4xl font-bold ink-strong">
-            Contact Information
-          </h1>
+    <div className="mx-auto max-w-5xl space-y-10 px-4 py-16">
+      <PageHeader
+        eyebrow="Contact"
+        title="Let's work together"
+        description="Have a project in mind or just want to say hi? I'd love to hear from you."
+      />
 
-          <div className="space-y-4 ink-soft text-base">
-            <div className="flex items-center gap-3">
-              <ChevronRightIcon className="w-5 h-5 ink-soft" />
-              <span className="ink-strong">
-                Email: peterpyaesone03@gmail.com
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <ChevronRightIcon className="w-5 h-5 ink-soft" />
-              <span className="ink-strong">
-                Phone: 09966073746
-              </span>
-            </div>
-          </div>
-
-          <div className="pt-6">
-            <p className="font-semibold ink-strong mb-3">
-              Find Me Online
-            </p>
-            <div className="flex gap-3">
-            <Link
-              href="https://www.linkedin.com/in/pyae-sone-ikol-4145a22a4/" // ← replace with your real LinkedIn URL
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                size="icon"
-                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              >
-                <Linkedin />
-              </Button>
-            </Link>
-            <Link
-              href="https://github.com/PyaeSone03"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="secondary"
-                size="icon"
-                className="size-8 ink-strong border-white/40 dark:border-white/20 glass-soft hover:bg-white/25 dark:hover:bg-white/10"
-              >
-                <GithubIcon />
-              </Button>
-            </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Side - Contact Form */}
-        <div className="flex-1 w-full max-w-md">
-          <Card className="w-full p-6 rounded-xl shadow-md glass-surface border border-white/35 dark:border-white/15">
-            <CardHeader className="mb-4">
-              <CardTitle className="text-2xl font-bold ink-strong">
-                Send a Message
-              </CardTitle>
-              <CardDescription className="ink-soft">
-                I&apos;d love to hear from you. Fill out the form below!
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                {/* Name */}
-                <div className="grid gap-2">
-                  <Label htmlFor="name" className="ink-strong">
-                    Name
-                  </Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Your full name"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="border-white/40 dark:border-white/20 ink-strong"
-                  />
+      <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
+        {/* Contact details */}
+        <aside className="glass flex flex-col gap-6 rounded-2xl p-6">
+          <ul className="space-y-4">
+            {details.map(({ icon: Icon, label, value, href }) => (
+              <li key={label} className="flex items-center gap-4">
+                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border bg-background/50">
+                  <Icon className="size-5 text-primary" />
+                </span>
+                <div className="min-w-0">
+                  <p className="text-xs text-muted-foreground">{label}</p>
+                  {href ? (
+                    <a href={href} className="break-all font-medium hover:text-primary">
+                      {value}
+                    </a>
+                  ) : (
+                    <p className="font-medium">{value}</p>
+                  )}
                 </div>
+              </li>
+            ))}
+          </ul>
 
-                {/* Email */}
-                <div className="grid gap-2">
-                  <Label htmlFor="email" className="ink-strong">
-                    Email
-                  </Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="border-white/40 dark:border-white/20 ink-strong"
-                  />
-                </div>
-
-                {/* Subject */}
-                <div className="grid gap-2">
-                  <Label
-                    htmlFor="subject"
-                    className="ink-strong"
-                  >
-                    Subject
-                  </Label>
-                  <Input
-                    id="subject"
-                    type="text"
-                    placeholder="Subject of your message"
-                    required
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    className="border-white/40 dark:border-white/20 ink-strong"
-                  />
-                </div>
-
-                {/* Message */}
-                <div className="grid gap-2">
-                  <Label
-                    htmlFor="message"
-                    className="ink-strong"
-                  >
-                    Message
-                  </Label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    placeholder="Type your message here..."
-                    required
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="w-full rounded-md border border-white/40 dark:border-white/20 bg-transparent px-3 py-2 text-sm ink-strong shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500/50 dark:focus:ring-sky-300/40"
-                  />
-                </div>
-
-                {/* Submit Button */}
+          <div className="mt-auto space-y-3 border-t pt-6">
+            <p className="text-sm font-medium">Find me online</p>
+            <div className="flex gap-2">
+              {[
+                { href: site.linkedin, label: "LinkedIn", icon: Linkedin },
+                { href: site.github, label: "GitHub", icon: GithubIcon },
+              ].map(({ href, label, icon: Icon }) => (
                 <Button
-                  type="submit"
-                  className="w-full accent-btn"
+                  key={label}
+                  asChild
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full bg-background/40"
                 >
-                  Send Message
+                  <Link
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                  >
+                    <Icon />
+                  </Link>
                 </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        {/* Contact form */}
+        <form
+          onSubmit={handleSubmit}
+          className="glass space-y-5 rounded-2xl p-6 sm:p-8"
+        >
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid gap-2">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                placeholder="Your full name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className={inputClass}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={inputClass}
+              />
+            </div>
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="subject">Subject</Label>
+            <Input
+              id="subject"
+              placeholder="What's this about?"
+              required
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              className={inputClass}
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="message">Message</Label>
+            <textarea
+              id="message"
+              rows={6}
+              placeholder="Type your message here..."
+              required
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full rounded-xl border border-input bg-background/50 px-3 py-2 text-sm shadow-xs outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            />
+          </div>
+
+          <Button type="submit" size="lg" className="w-full rounded-full">
+            <Send /> Send message
+          </Button>
+        </form>
       </div>
     </div>
   );
