@@ -132,7 +132,7 @@ const Page = () => {
 
           <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
             <Button asChild className="rounded-full">
-              <a href={site.resume} download="PyaeSone_Resume.pdf">
+              <a href={site.resume} download="resume.pdf">
                 <Download /> Download resume
               </a>
             </Button>
@@ -216,9 +216,9 @@ const Page = () => {
           <div className="flex items-center gap-3 rounded-2xl border bg-background/40 p-3">
             <FileText className="size-8 shrink-0 text-muted-foreground" />
             <div className="min-w-0 text-sm">
-              <p className="truncate font-medium">Pyae_Sone_Resume.pdf</p>
+              <p className="truncate font-medium">resume.pdf</p>
               <p className="text-xs text-muted-foreground">
-                Updated August 23, 2025
+                Updated October 15, 2026
               </p>
             </div>
           </div>
@@ -233,7 +233,7 @@ const Page = () => {
               </a>
             </Button>
             <Button asChild className="flex-1 rounded-full">
-              <a href={site.resume} download="PyaeSone_Resume.pdf">
+              <a href={site.resume} download="resume.pdf">
                 <Download /> Download
               </a>
             </Button>
