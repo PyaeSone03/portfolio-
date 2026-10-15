@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ArrowRight, GithubIcon, Linkedin, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useDevToast } from "@/hooks/use-dev-toast";
 import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
@@ -14,14 +13,12 @@ const highlights = [
 ];
 
 export default function Home() {
-  useDevToast();
-
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-10rem)] max-w-5xl items-center px-4 py-16">
+    <section className="mx-auto flex max-w-5xl flex-1 items-center px-4 py-10">
       <div className="w-full">
-        <div className="fade-up max-w-3xl space-y-7">
+        <div className="max-w-3xl space-y-7">
           <span className="eyebrow">
-            <span className="size-2 rounded-full bg-zinc-200 shadow-[0_0_8px] shadow-white/70" />
+            <span className="status-dot" />
             Available for freelance work
           </span>
 

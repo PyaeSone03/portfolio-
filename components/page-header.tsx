@@ -8,7 +8,7 @@ export function PageHeader({
   description?: string;
 }) {
   return (
-    <header className="fade-up space-y-3">
+    <header className="space-y-3">
       <span className="eyebrow">{eyebrow}</span>
       <h1 className="text-3xl font-semibold tracking-tight sm:text-5xl">
         {title}

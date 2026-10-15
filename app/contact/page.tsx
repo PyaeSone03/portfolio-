@@ -2,20 +2,26 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { GithubIcon, Linkedin, Mail, MapPin, Phone, Send } from "lucide-react";
+import {
+  Check,
+  Copy,
+  GithubIcon,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Send,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PageHeader } from "@/components/page-header";
-import { useDevToast } from "@/hooks/use-dev-toast";
 import { site } from "@/lib/site";
 
 const inputClass = "h-11 rounded-xl bg-background/50";
 
 const Page = () => {
-  useDevToast();
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -38,6 +44,18 @@ const Page = () => {
     }
   };
 
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      toast.error("Couldn't copy. Please copy the address manually.");
+    }
+  };
+
   const details = [
     { icon: Mail, label: "Email", value: site.email, href: `mailto:${site.email}` },
     { icon: Phone, label: "Phone", value: site.phone, href: `tel:${site.phone}` },
@@ -55,25 +73,57 @@ const Page = () => {
       <div className="grid gap-6 lg:grid-cols-[1fr_1.4fr]">
         {/* Contact details */}
         <aside className="glass flex flex-col gap-6 rounded-2xl p-6">
-          <ul className="space-y-4">
-            {details.map(({ icon: Icon, label, value, href }) => (
-              <li key={label} className="flex items-center gap-4">
-                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl border bg-background/50">
-                  <Icon className="size-5 text-primary" />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-xs text-muted-foreground">{label}</p>
+          <div className="space-y-2">
+            <span className="eyebrow">
+              <span className="status-dot" />
+              Available for freelance work
+            </span>
+            <p className="text-sm text-muted-foreground">
+              Prefer email? Write to me directly or copy my address.
+            </p>
+          </div>
+
+          <ul className="space-y-2">
+            {details.map(({ icon: Icon, label, value, href }) => {
+              const body = (
+                <>
+                  <span className="metal-chip size-11 shrink-0 rounded-xl">
+                    <Icon className="size-5" />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-xs text-muted-foreground">
+                      {label}
+                    </span>
+                    <span className="block break-all font-medium">{value}</span>
+                  </span>
+                </>
+              );
+              return (
+                <li key={label}>
                   {href ? (
-                    <a href={href} className="break-all font-medium hover:text-primary">
-                      {value}
+                    <a
+                      href={href}
+                      className="flex items-center gap-4 rounded-xl p-2 transition-colors hover:bg-accent"
+                    >
+                      {body}
                     </a>
                   ) : (
-                    <p className="font-medium">{value}</p>
+                    <div className="flex items-center gap-4 p-2">{body}</div>
                   )}
-                </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
+
+          <Button
+            type="button"
+            variant="outline"
+            className="rounded-full bg-background/40"
+            onClick={copyEmail}
+          >
+            {copied ? <Check /> : <Copy />}
+            {copied ? "Email copied" : "Copy email address"}
+          </Button>
 
           <div className="mt-auto space-y-3 border-t pt-6">
             <p className="text-sm font-medium">Find me online</p>
@@ -108,6 +158,15 @@ const Page = () => {
           onSubmit={handleSubmit}
           className="glass space-y-5 rounded-2xl p-6 sm:p-8"
         >
+          <div className="space-y-1">
+            <h2 className="text-xl font-semibold tracking-tight">
+              Send a message
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              This opens your email app with the message ready to send.
+            </p>
+          </div>
+
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="grid gap-2">
               <Label htmlFor="name">Name</Label>

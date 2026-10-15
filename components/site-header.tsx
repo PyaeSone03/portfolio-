@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { MenuIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Monogram } from "@/components/monogram";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   Sheet,
   SheetClose,
@@ -50,7 +51,8 @@ export function SiteHeader() {
           })}
         </nav>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1">
+          <ThemeToggle />
           <Sheet>
             <SheetTrigger asChild>
               <Button

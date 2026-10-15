@@ -10,30 +10,41 @@ import {
   FileText,
   GithubIcon,
   GraduationCap,
+  Hourglass,
+  Laptop,
   Linkedin,
   MapPin,
   UserRound,
 } from "lucide-react";
 import { Monogram } from "@/components/monogram";
+import { Tile } from "@/components/tile";
 import { Button } from "@/components/ui/button";
-import { useDevToast } from "@/hooks/use-dev-toast";
 import { site } from "@/lib/site";
 
-const story = [
+const facts = [
+  { value: "~2 yrs", label: "Experience", icon: Hourglass },
+  { value: "Freelance", label: "Currently", icon: Laptop },
+];
+
+// Most recent first.
+const experience = [
   {
-    title: "Background",
-    icon: UserRound,
-    text: "Originally from Myanmar and currently based in Chiang Mai, Thailand, I work as a freelance junior software engineer and UI/UX designer.",
+    time: "Now",
+    name: "Freelance Software Engineer & UI/UX Designer",
+    description:
+      "Designing and building web products for clients from Chiang Mai, Thailand.",
   },
   {
-    title: "Experience",
-    icon: Briefcase,
-    text: "I have nearly two years of experience in software development and UI/UX design. As a UI/UX intern at a bank, I worked on ATM interface design and improved the internal chat system. Later, at Dai-ichi Life, I joined the app team as a junior developer to build a Call Management System using .NET and React.js, where I also guided the frontend development and timeline.",
+    time: "Dai-ichi Life",
+    name: "Junior Developer, App Team",
+    description:
+      "Built a Call Management System with .NET and React.js, and guided the frontend development and timeline.",
   },
   {
-    title: "Vision",
-    icon: Compass,
-    text: "My mission is to craft accessible, efficient, and beautiful user experiences that create real impact — whether for startups or enterprise-level solutions.",
+    time: "Bank",
+    name: "UI/UX Intern",
+    description:
+      "Worked on ATM interface design and improved the internal chat system.",
   },
 ];
 
@@ -68,10 +79,14 @@ function Timeline({
       {items.map((item) => (
         <li key={item.name} className="relative">
           <span className="bg-gradient-brand absolute top-1.5 -left-[29px] size-2.5 rounded-full ring-4 ring-background" />
-          <p className="text-xs font-medium text-primary">{item.time}</p>
-          <p className="font-medium">{item.name}</p>
+          <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+            {item.time}
+          </p>
+          <p className="mt-0.5 font-medium">{item.name}</p>
           {item.description && (
-            <p className="text-sm text-muted-foreground">{item.description}</p>
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              {item.description}
+            </p>
           )}
         </li>
       ))}
@@ -80,42 +95,47 @@ function Timeline({
 }
 
 const Page = () => {
-  useDevToast();
-
   return (
-    <div className="mx-auto max-w-5xl space-y-6 px-4 py-16">
-      {/* Profile */}
-      <section className="glass fade-up flex flex-col items-center gap-8 rounded-3xl p-8 sm:flex-row sm:p-10">
-        <Monogram className="size-32 shrink-0 text-5xl sm:size-40 sm:text-6xl" />
-
-        <div className="flex-1 space-y-4 text-center sm:text-left">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              {site.name}
-            </h1>
-            <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-muted-foreground sm:justify-start">
-              <MapPin className="size-4" />
-              {site.location}
-            </p>
+    <div className="mx-auto max-w-5xl px-4 py-16">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-6">
+        {/* Row 1: profile + facts */}
+        <Tile className="col-span-2 justify-center md:col-span-4 md:row-span-2 md:p-8">
+          <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:text-left">
+            <Monogram className="size-24 shrink-0 text-3xl sm:size-28 sm:text-4xl" />
+            <div className="space-y-3">
+              <div>
+                <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+                  {site.name}
+                </h1>
+                <p className="mt-1 flex items-center justify-center gap-1.5 text-sm text-muted-foreground sm:justify-start">
+                  <MapPin className="size-4" />
+                  {site.location}
+                </p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
+                {["Software Developer", "UX Designer"].map((role) => (
+                  <span
+                    key={role}
+                    className="rounded-full border bg-background/50 px-3 py-1 text-sm"
+                  >
+                    {role}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
-            {["Software Developer", "UX Designer"].map((role) => (
-              <span
-                key={role}
-                className="rounded-full border bg-background/50 px-3 py-1 text-sm"
-              >
-                {role}
-              </span>
-            ))}
-          </div>
-
-          <p className="text-muted-foreground">
+          <p className="border-t pt-5 text-muted-foreground">
             I create user-centered digital experiences that solve real
             problems.
           </p>
 
-          <div className="flex justify-center gap-2 sm:justify-start">
+          <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
+            <Button asChild className="rounded-full">
+              <a href={site.resume} download="PyaeSone_Resume.pdf">
+                <Download /> Download resume
+              </a>
+            </Button>
             {[
               { href: site.linkedin, label: "LinkedIn", icon: Linkedin },
               { href: site.github, label: "GitHub", icon: GithubIcon },
@@ -132,67 +152,94 @@ const Page = () => {
               </Button>
             ))}
           </div>
-        </div>
-      </section>
+        </Tile>
 
-      {/* About */}
-      <section className="grid gap-6 md:grid-cols-3">
-        {story.map(({ title, icon: Icon, text }) => (
-          <article
-            key={title}
-            className="glass glass-hover fade-up space-y-3 rounded-2xl p-6"
+        {facts.map(({ value, label, icon: Icon }) => (
+          <Tile
+            key={label}
+            className="col-span-1 justify-between gap-6 md:col-span-2"
           >
-            <span className="metal-chip size-10 rounded-xl">
-              <Icon className="size-5" />
-            </span>
-            <h2 className="text-lg font-semibold">{title}</h2>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {text}
+            <div className="flex items-center justify-between">
+              <p className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
+                {label}
+              </p>
+              <Icon className="size-4 text-muted-foreground" />
+            </div>
+            <p className="text-gradient text-2xl font-semibold tracking-tight sm:text-4xl">
+              {value}
             </p>
-          </article>
+          </Tile>
         ))}
-      </section>
 
-      {/* Education & Certifications */}
-      <section className="grid gap-6 md:grid-cols-2">
-        <article className="glass space-y-5 rounded-2xl p-6">
-          <h2 className="flex items-center gap-2 text-lg font-semibold">
-            <GraduationCap className="size-5 text-primary" /> Education
-          </h2>
-          <Timeline items={education} />
-        </article>
-        <article className="glass space-y-5 rounded-2xl p-6">
-          <h2 className="flex items-center gap-2 text-lg font-semibold">
-            <Award className="size-5 text-primary" /> Certifications
-          </h2>
-          <Timeline items={certifications} />
-        </article>
-      </section>
-
-      {/* Resume */}
-      <section className="glass flex flex-col items-center gap-6 rounded-2xl p-6 sm:flex-row">
-        <span className="inline-flex size-14 shrink-0 items-center justify-center rounded-2xl border bg-background/50">
-          <FileText className="size-7 text-primary" />
-        </span>
-        <div className="flex-1 text-center sm:text-left">
-          <h2 className="text-lg font-semibold">Resume</h2>
-          <p className="text-sm text-muted-foreground">
-            Pyae_Sone_Resume.pdf · Last updated August 23, 2025
+        {/* Row 2: about + experience */}
+        <Tile title="About Me" icon={UserRound} className="col-span-2">
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Originally from Myanmar and now based in Chiang Mai, Thailand, I
+            work as a freelance junior software engineer and UI/UX designer.
           </p>
-        </div>
-        <div className="flex gap-2">
-          <Button asChild variant="outline" className="rounded-full bg-background/40">
-            <a href={site.resume} target="_blank" rel="noopener noreferrer">
-              <Eye /> Preview
-            </a>
-          </Button>
-          <Button asChild className="rounded-full">
-            <a href={site.resume} download="PyaeSone_Resume.pdf">
-              <Download /> Download
-            </a>
-          </Button>
-        </div>
-      </section>
+          <div className="mt-auto flex gap-3 rounded-2xl border bg-background/40 p-4 text-sm">
+            <Compass className="mt-0.5 size-4 shrink-0" />
+            <p className="leading-relaxed text-muted-foreground">
+              <span className="font-medium text-foreground">Vision. </span>
+              Craft accessible, efficient, and beautiful user experiences that
+              create real impact — for startups or enterprise.
+            </p>
+          </div>
+        </Tile>
+
+        <Tile
+          title="Experience"
+          icon={Briefcase}
+          className="col-span-2 md:col-span-4"
+        >
+          <Timeline items={experience} />
+        </Tile>
+
+        {/* Row 3: education & certifications + resume */}
+        <Tile
+          title="Education & Certifications"
+          icon={GraduationCap}
+          className="col-span-2 md:col-span-4"
+        >
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Timeline items={education} />
+            <div className="space-y-3">
+              <p className="flex items-center gap-2 text-sm font-medium">
+                <Award className="size-4" /> Certifications
+              </p>
+              <Timeline items={certifications} />
+            </div>
+          </div>
+        </Tile>
+
+        <Tile title="Resume" icon={FileText} className="col-span-2">
+          <div className="flex items-center gap-3 rounded-2xl border bg-background/40 p-3">
+            <FileText className="size-8 shrink-0 text-muted-foreground" />
+            <div className="min-w-0 text-sm">
+              <p className="truncate font-medium">Pyae_Sone_Resume.pdf</p>
+              <p className="text-xs text-muted-foreground">
+                Updated August 23, 2025
+              </p>
+            </div>
+          </div>
+          <div className="mt-auto flex gap-2">
+            <Button
+              asChild
+              variant="outline"
+              className="flex-1 rounded-full bg-background/40"
+            >
+              <a href={site.resume} target="_blank" rel="noopener noreferrer">
+                <Eye /> Preview
+              </a>
+            </Button>
+            <Button asChild className="flex-1 rounded-full">
+              <a href={site.resume} download="PyaeSone_Resume.pdf">
+                <Download /> Download
+              </a>
+            </Button>
+          </div>
+        </Tile>
+      </div>
     </div>
   );
 };

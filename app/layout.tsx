@@ -36,13 +36,16 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          forcedTheme="dark"
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <ReactBitsBackground />
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
-            <main className="flex-1">{children}</main>
+            {/* Pages fill the space between header and footer, so a short
+                page (like Home) can center itself without overflowing. */}
+            <main className="flex flex-1 flex-col [&>*]:w-full">{children}</main>
             <SiteFooter />
           </div>
           <Toaster position="bottom-right" />

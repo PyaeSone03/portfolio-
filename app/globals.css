@@ -32,11 +32,64 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Dark-only "metal" palette: graphite surfaces, silver accents, no hue. */
-:root,
+/* "Metal" palettes with no hue. Light is brushed aluminium, dark is
+   graphite. Everything below reads these variables, so both themes share
+   one set of component styles. */
+:root {
+  color-scheme: light;
+  --radius: 0.75rem;
+  --background: oklch(0.95 0 0);
+  --foreground: oklch(0.17 0 0);
+  --card: oklch(1 0 0 / 65%);
+  --card-foreground: oklch(0.17 0 0);
+  --popover: oklch(0.98 0 0);
+  --popover-foreground: oklch(0.17 0 0);
+  --primary: oklch(0.2 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.9 0 0);
+  --secondary-foreground: oklch(0.17 0 0);
+  --muted: oklch(0.88 0 0);
+  --muted-foreground: oklch(0.42 0 0);
+  --accent: oklch(0.9 0 0);
+  --accent-foreground: oklch(0.17 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 14%);
+  --ring: oklch(0.3 0 0 / 40%);
+  --brand: oklch(0.2 0 0);
+  --brand-2: oklch(0.55 0 0);
+  /* Brushed-steel gradient for bars and dots. */
+  --metal: linear-gradient(
+    135deg,
+    oklch(0.35 0 0) 0%,
+    oklch(0.6 0 0) 40%,
+    oklch(0.3 0 0) 60%,
+    oklch(0.5 0 0) 100%
+  );
+  /* Polished text: dark steel on light. */
+  --metal-text: linear-gradient(
+    100deg,
+    oklch(0.15 0 0) 0%,
+    oklch(0.38 0 0) 45%,
+    oklch(0.12 0 0) 60%,
+    oklch(0.35 0 0) 100%
+  );
+  --glass-from: oklch(1 0 0 / 80%);
+  --glass-to: oklch(0.96 0 0 / 70%);
+  --glass-highlight: oklch(1 0 0 / 90%);
+  --glass-shadow: oklch(0 0 0 / 14%);
+  --hover-border: oklch(0 0 0 / 22%);
+  --chip-from: oklch(1 0 0);
+  --chip-to: oklch(0.88 0 0);
+  --chip-border: oklch(0 0 0 / 12%);
+  --chip-highlight: oklch(1 0 0);
+  --chip-shadow: oklch(0 0 0 / 18%);
+  --selection: oklch(0 0 0 / 14%);
+  --glow: oklch(0.2 0 0);
+}
+
 .dark {
   color-scheme: dark;
-  --radius: 0.75rem;
   --background: oklch(0.13 0 0);
   --foreground: oklch(0.96 0 0);
   --card: oklch(0.2 0 0 / 60%);
@@ -48,7 +101,7 @@
   --secondary: oklch(0.24 0 0);
   --secondary-foreground: oklch(0.96 0 0);
   --muted: oklch(0.25 0 0);
-  --muted-foreground: oklch(0.68 0 0);
+  --muted-foreground: oklch(0.72 0 0);
   --accent: oklch(0.27 0 0);
   --accent-foreground: oklch(0.96 0 0);
   --destructive: oklch(0.704 0.191 22.216);
@@ -57,7 +110,6 @@
   --ring: oklch(0.85 0 0 / 50%);
   --brand: oklch(0.95 0 0);
   --brand-2: oklch(0.6 0 0);
-  /* Brushed-steel gradient used for headings, bars and chips. */
   --metal: linear-gradient(
     135deg,
     oklch(0.98 0 0) 0%,
@@ -65,6 +117,25 @@
     oklch(0.94 0 0) 55%,
     oklch(0.6 0 0) 100%
   );
+  --metal-text: linear-gradient(
+    100deg,
+    oklch(1 0 0) 0%,
+    oklch(0.88 0 0) 45%,
+    oklch(1 0 0) 60%,
+    oklch(0.85 0 0) 100%
+  );
+  --glass-from: oklch(0.22 0 0 / 70%);
+  --glass-to: oklch(0.16 0 0 / 70%);
+  --glass-highlight: oklch(1 0 0 / 9%);
+  --glass-shadow: oklch(0 0 0 / 70%);
+  --hover-border: oklch(1 0 0 / 22%);
+  --chip-from: oklch(0.32 0 0);
+  --chip-to: oklch(0.2 0 0);
+  --chip-border: oklch(1 0 0 / 14%);
+  --chip-highlight: oklch(1 0 0 / 18%);
+  --chip-shadow: oklch(0 0 0 / 80%);
+  --selection: oklch(1 0 0 / 22%);
+  --glow: oklch(1 0 0 / 70%);
 }
 
 @layer base {
@@ -79,24 +150,20 @@
     min-height: 100vh;
   }
   ::selection {
-    background: oklch(1 0 0 / 22%);
+    background: var(--selection);
   }
 }
 
 @layer utilities {
-  /* Dark brushed-glass card that sits over the background. */
+  /* Brushed-glass card that sits over the background. */
   .glass {
-    background: linear-gradient(
-      180deg,
-      oklch(0.22 0 0 / 70%),
-      oklch(0.16 0 0 / 70%)
-    );
+    background: linear-gradient(180deg, var(--glass-from), var(--glass-to));
     border: 1px solid var(--border);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     box-shadow:
-      0 1px 0 0 oklch(1 0 0 / 9%) inset,
-      0 12px 32px -14px oklch(0 0 0 / 70%);
+      0 1px 0 0 var(--glass-highlight) inset,
+      0 12px 32px -14px var(--glass-shadow);
   }
 
   .glass-hover {
@@ -107,14 +174,15 @@
   }
   .glass-hover:hover {
     transform: translateY(-3px);
-    border-color: oklch(1 0 0 / 24%);
-    box-shadow:
-      0 1px 0 0 oklch(1 0 0 / 14%) inset,
-      0 20px 44px -18px oklch(0 0 0 / 85%);
+    border-color: var(--hover-border);
+  }
+
+  .hover-border:hover {
+    border-color: var(--hover-border);
   }
 
   .text-gradient {
-    background: var(--metal);
+    background: var(--metal-text);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -127,11 +195,11 @@
   /* Small steel tile for section icons. */
   .metal-chip {
     @apply inline-flex items-center justify-center text-foreground;
-    background: linear-gradient(180deg, oklch(0.32 0 0), oklch(0.2 0 0));
-    border: 1px solid oklch(1 0 0 / 14%);
+    background: linear-gradient(180deg, var(--chip-from), var(--chip-to));
+    border: 1px solid var(--chip-border);
     box-shadow:
-      0 1px 0 0 oklch(1 0 0 / 18%) inset,
-      0 4px 10px -4px oklch(0 0 0 / 80%);
+      0 1px 0 0 var(--chip-highlight) inset,
+      0 4px 10px -4px var(--chip-shadow);
   }
 
   .eyebrow {
@@ -141,135 +209,62 @@
     backdrop-filter: blur(12px);
   }
 
-  .fade-up {
-    animation: fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* Small "online" status dot. */
+  .status-dot {
+    @apply size-2 rounded-full;
+    background: var(--glow);
+    box-shadow: 0 0 8px var(--glow);
   }
-}
-
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes logoSpin360 {
-  0%,
-  86%,
-  100% {
-    transform: rotate(0deg);
-  }
-  88% {
-    transform: translate3d(-2px, 1px, 0) rotate(-6deg);
-  }
-  90% {
-    transform: translate3d(2px, -1px, 0) rotate(5deg);
-  }
-  92% {
-    transform: translate3d(-1px, 0, 0) rotate(-2deg);
-  }
-}
-
-@keyframes progressBarGlitch {
-  0%,
-  100% {
-    clip-path: inset(0 0 0 0);
-    filter: hue-rotate(var(--pg-hue, 0deg)) saturate(var(--pg-sat, 1.2))
-      contrast(var(--pg-contrast, 1.2));
-    translate: 0 0;
-  }
-  25% {
-    clip-path: inset(8% 0 52% 0);
-    translate: var(--pg-shift, 0px) 0;
-  }
-  50% {
-    clip-path: inset(36% 0 18% 0);
-    translate: calc(var(--pg-shift, 0px) * -1) 0;
-  }
-  75% {
-    clip-path: inset(66% 0 6% 0);
-    translate: calc(var(--pg-shift, 0px) * 0.5) 0;
-  }
-}
-
-/* Skills page: scrolling briefly glitches the progress bars and reveals a
-   framework's icon. Driven by app/skill/page.tsx. */
-.skill-tech-card {
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease;
-}
-
-.tech-icon-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.6) rotate(-12deg);
-  opacity: 0;
-  color: var(--brand);
-  transition:
-    transform 220ms ease,
-    opacity 220ms ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.tech-label-wrap {
-  transition:
-    transform 200ms ease,
-    opacity 200ms ease,
-    filter 200ms ease;
-}
-
-.tech-glitch-active {
-  border-color: color-mix(in oklch, var(--brand) 55%, transparent);
-  box-shadow: 0 0 26px color-mix(in oklch, var(--brand) 25%, transparent);
-  transform: skewX(-1deg);
-}
-
-.tech-glitch-active .tech-icon-wrap {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
-  animation: logoSpin360 0.9s steps(2, end) infinite;
-}
-
-.tech-glitch-active .tech-label-wrap {
-  opacity: 0.18;
-  filter: blur(1px);
-  transform: translateX(8px);
 }
 
 [data-slot="progress-indicator"] {
   background: var(--metal);
 }
 
-.skill-scroll-glitch [data-slot="progress"] {
-  transform: translateX(var(--scroll-shift, 0px));
+/* Theme switch: sunrise and sunset.
+   The toggle wraps setTheme in document.startViewTransition and sets
+   data-theme-switch on <html>. Sunrise grows the new light page up from
+   the bottom like a rising sun; sunset sinks the old light page back down
+   below the horizon, revealing the dark page behind it. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-.skill-scroll-glitch [data-slot="progress-indicator"] {
-  animation: progressBarGlitch
-    calc(0.32s - (var(--scroll-energy, 0) * 0.18s)) steps(2, end) infinite;
+[data-theme-switch="sunrise"]::view-transition-new(root) {
+  animation: sunrise 1200ms cubic-bezier(0.45, 0, 0.2, 1) both;
 }
 
-.skill-scroll-glitch .skill-tech-card {
-  transform: translateX(calc(var(--scroll-shift, 0px) * 0.25));
+[data-theme-switch="sunset"]::view-transition-old(root) {
+  z-index: 1;
+  animation: sunset 1200ms cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+
+@keyframes sunrise {
+  from {
+    clip-path: circle(0% at 50% 115%);
+  }
+  to {
+    clip-path: circle(150% at 50% 115%);
+  }
+}
+
+@keyframes sunset {
+  from {
+    clip-path: circle(150% at 50% 115%);
+  }
+  to {
+    clip-path: circle(0% at 50% 115%);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up,
-  .tech-glitch-active .tech-icon-wrap,
-  .skill-scroll-glitch [data-slot="progress-indicator"] {
-    animation: none;
-  }
   .glass-hover:hover {
     transform: none;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
   }
 }

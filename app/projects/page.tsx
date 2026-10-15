@@ -2,12 +2,9 @@
 
 import { PageHeader } from "@/components/page-header";
 import { ProjectCard } from "@/components/project-card";
-import { useDevToast } from "@/hooks/use-dev-toast";
 import { projects } from "@/lib/projects";
 
 const Page = () => {
-  useDevToast();
-
   return (
     <div className="mx-auto max-w-5xl space-y-10 px-4 py-16">
       <PageHeader
