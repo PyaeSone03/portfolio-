@@ -6,7 +6,7 @@ export const site = {
   phone: "09966073746",
   github: "https://github.com/PyaeSone03",
   linkedin: "https://www.linkedin.com/in/pyae-sone-ikol-4145a22a4/",
-  resume: "/file/resume.pdf",
+  resume: "/file/pyaesone_ikoL.pdf",
 };
 
 export const navItems = [
