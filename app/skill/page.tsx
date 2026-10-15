@@ -30,8 +30,8 @@ import { projects } from "@/lib/projects";
 const languages = [
   { name: "JavaScript", value: 90 },
   { name: "TypeScript", value: 70 },
-  { name: "Python", value: 60 },
-  { name: ".Net", value: 50 },
+  { name: "Python", value: 50 },
+  { name: ".Net", value: 85 },
 ];
 
 const techSkills = [

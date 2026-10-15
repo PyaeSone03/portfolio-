@@ -7,7 +7,7 @@ import { projects } from "@/lib/projects";
 import { site } from "@/lib/site";
 
 const highlights = [
-  { value: "~2 yrs", label: "Experience" },
+  { value: "3 yrs", label: "Experience" },
   { value: String(projects.length), label: "Projects" },
   { value: "UI/UX", label: "Design-led" },
 ];

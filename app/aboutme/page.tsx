@@ -22,27 +22,32 @@ import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
 
 const facts = [
-  { value: "~2 yrs", label: "Experience", icon: Hourglass },
-  { value: "Freelance", label: "Currently", icon: Laptop },
+  { value: "3 yrs", label: "Experience", icon: Hourglass },
+  { value: "CorpitIT", label: "Currently", icon: Laptop },
 ];
 
 // Most recent first.
 const experience = [
   {
-    time: "Now",
-    name: "Freelance Software Engineer & UI/UX Designer",
+    time: "Now · CorpitIT",
+    name: "Full Stack Developer",
     description:
-      "Designing and building web products for clients from Chiang Mai, Thailand.",
+      "Building and maintaining event platforms with C#, .NET, Angular and SQL.",
+  },
+  {
+    time: "Freelance",
+    name: "Software Engineer & UI/UX Designer",
+    description: "Designing and building web products.",
   },
   {
     time: "Dai-ichi Life",
-    name: "Junior Developer, App Team",
+    name: "Junior System Analyst",
     description:
       "Built a Call Management System with .NET and React.js, and guided the frontend development and timeline.",
   },
   {
-    time: "Bank",
-    name: "UI/UX Intern",
+    time: "A Bank",
+    name: "Intern as UIUX Designer",
     description:
       "Worked on ATM interface design and improved the internal chat system.",
   },
@@ -132,7 +137,7 @@ const Page = () => {
 
           <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
             <Button asChild className="rounded-full">
-              <a href={site.resume} download="PyaeSone_Resume.pdf">
+              <a href={site.resume} download="resume.pdf">
                 <Download /> Download resume
               </a>
             </Button>
@@ -175,7 +180,7 @@ const Page = () => {
         <Tile title="About Me" icon={UserRound} className="col-span-2">
           <p className="text-sm leading-relaxed text-muted-foreground">
             Originally from Myanmar and now based in Chiang Mai, Thailand, I
-            work as a freelance junior software engineer and UI/UX designer.
+            work as a freelance software engineer and UI/UX designer.
           </p>
           <div className="mt-auto flex gap-3 rounded-2xl border bg-background/40 p-4 text-sm">
             <Compass className="mt-0.5 size-4 shrink-0" />
@@ -216,9 +221,9 @@ const Page = () => {
           <div className="flex items-center gap-3 rounded-2xl border bg-background/40 p-3">
             <FileText className="size-8 shrink-0 text-muted-foreground" />
             <div className="min-w-0 text-sm">
-              <p className="truncate font-medium">Pyae_Sone_Resume.pdf</p>
+              <p className="truncate font-medium">resume.pdf</p>
               <p className="text-xs text-muted-foreground">
-                Updated August 23, 2025
+                Updated October 15, 2026
               </p>
             </div>
           </div>
@@ -233,7 +238,7 @@ const Page = () => {
               </a>
             </Button>
             <Button asChild className="flex-1 rounded-full">
-              <a href={site.resume} download="PyaeSone_Resume.pdf">
+              <a href={site.resume} download="resume.pdf">
                 <Download /> Download
               </a>
             </Button>

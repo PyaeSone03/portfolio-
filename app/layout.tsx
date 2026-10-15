@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Pyae Sone ikoL — Portfolio",
+  title: "Pyae Sone Adam — Portfolio",
   description:
     "Software developer and UI/UX designer based in Chiang Mai, Thailand.",
 };
